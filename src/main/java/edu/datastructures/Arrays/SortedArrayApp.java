@@ -1,5 +1,6 @@
 package edu.datastructures.Arrays;
 
+
 public class SortedArrayApp {
     private long[] array;
     private int numAmount = 0;
@@ -8,7 +9,7 @@ public class SortedArrayApp {
         array = new long[size];
     }
 
-    public void fillWithRandoms(int numAmount) {
+    public long[] fillWithRandoms(int numAmount) {
         int checker;
         for (int i = 0; i < numAmount; ) {
             checker = this.numAmount;
@@ -18,6 +19,7 @@ public class SortedArrayApp {
             if (checker == this.numAmount) ;
             else i++;
         }
+        return array;
     }
 
     public void add(long num) {
@@ -25,20 +27,20 @@ public class SortedArrayApp {
             System.out.println("Array's full");
         } else {
             if (numAmount > 0) {
-                for (int i = 0; i < numAmount; i++) {
-                    if (array[i] == num) {
-                        System.out.println("This number is already defined in the array");
-                        return;
-                    }
-                }
-                for (int i = numAmount; i > 0; i--) {
-                    if (array[i - 1] < num) {
-                        array[i] = num;
-                        break;
-                    } else {
-                        array[i] = array[i - 1];
-                        if (i == 1) {
-                            array[i - 1] = num;
+                int index = binarySearchRealisation(num, 0, numAmount - 1);
+                if (index > -1) {
+                    System.out.println(num + " is already defined in the array");
+                    return;
+                } else {
+                    for (int i = numAmount; i > 0; i--) {
+                        if (array[i - 1] < num) {
+                            array[i] = num;
+                            break;
+                        } else {
+                            array[i] = array[i - 1];
+                            if (i == 1) {
+                                array[i - 1] = num;
+                            }
                         }
                     }
                 }
@@ -54,24 +56,15 @@ public class SortedArrayApp {
     }
 
     public void delete(long num) {
-        int i;
-        for (i = 0; i < numAmount; i++) {
-            if (array[i] == num) {
-                for (int j = i; j < numAmount - 1; j++) {
-                    array[j] = array[j + 1];
-                }
-                array[numAmount - 1] = 0;
-                numAmount--;
-                System.out.println(num + " deleted from the array");
-                return;
-            }
-            if (array[i] > num) {
-                System.out.println(num + " wasn't in the array");
-                return;
-            }
-        }
-        if (i == numAmount) {
+        int index = binarySearchRealisation(num, 0, numAmount - 1);
+        if (index < 0) {
             System.out.println(num + " wasn't in the array");
+            return;
+        } else {
+            for (int i = index; i < numAmount - 1; i++) {
+                array[i] = array[i + 1];
+            }
+            System.out.println(num + " deleted from the array");
         }
     }
 
@@ -127,6 +120,33 @@ public class SortedArrayApp {
         }
         System.out.println("]");
     }
+
+    public static long[] merge(long[] array1, long[] array2) {
+        long[] mergedArray = new long[array1.length + array2.length];
+        int index1 = 0;
+        int index2 = 0;
+
+        for (int i = 0; i < mergedArray.length; i++) {
+            if (index1 < array1.length && index2 < array2.length) {
+                if (array1[index1] < array2[index2]) {
+                    mergedArray[i] = array1[index1];
+                    index1++;
+                } else {
+                    mergedArray[i] = array2[index2];
+                    index2++;
+                }
+            } else {
+                if (index1 < array1.length) {
+                    mergedArray[i] = array1[index1];
+                    index1++;
+                } else {
+                    mergedArray[i] = array2[index2];
+                    index2++;
+                }
+            }
+        }
+        return mergedArray;
+    }
 }
 
 class SortedArrayAppUser {
@@ -140,11 +160,13 @@ class SortedArrayAppUser {
         System.out.println(sortedArray.getElem(7));
         sortedArray.delete(30);
         sortedArray.show();
+        System.out.println();
 
         sortedArray.add(100);
         sortedArray.add(1);
         sortedArray.add(18);
         sortedArray.show();
+        System.out.println();
 
         sortedArray.linearSearch(100);
         sortedArray.linearSearch(1);
@@ -152,5 +174,27 @@ class SortedArrayAppUser {
 
         sortedArray.binarySearch(18);
         sortedArray.binarySearch(17);
+        System.out.println();
+
+        sortedArray.delete(18);
+        sortedArray.delete(100);
+        sortedArray.delete(121);
+        sortedArray.show();
+        System.out.println();
+
+        long[] sortedArray1 = new SortedArrayApp(30).fillWithRandoms(30);
+        long[] sortedArray2 = new SortedArrayApp(12).fillWithRandoms(12);
+        long[] mergedArray = SortedArrayApp.merge(sortedArray1, sortedArray2);
+
+        for (int i = 0; i < mergedArray.length; i++) {
+            if (i == 0) {
+                System.out.print("[");
+            }
+            if (i == mergedArray.length - 1) {
+                System.out.println(mergedArray[i] + "]");
+            } else {
+                System.out.print(mergedArray[i] + ", ");
+            }
+        }
     }
 }
