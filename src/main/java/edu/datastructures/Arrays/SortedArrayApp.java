@@ -127,8 +127,6 @@ public class SortedArrayApp {
         }
         System.out.println("]");
     }
-
-
 }
 
 class SortedArrayAppUser {
