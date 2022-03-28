@@ -1,13 +1,13 @@
 package edu.datastructures.Arrays;
 
-import java.util.Arrays;
 
 public class ArrayApp {
     private long[] array;
-    private int numAmount = 0;
+    private int numAmount;
 
     ArrayApp(int size) {
         array = new long[size];
+        numAmount = 0;
     }
 
     public void fillWithRandoms(int numAmount) {

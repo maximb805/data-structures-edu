@@ -4,8 +4,8 @@ package edu.datastructures.Arrays;
 import java.time.LocalDate;
 
 public class ClassArray {
-    Person[] persons;
-    int elemNumber;
+    private Person[] persons;
+    private int elemNumber;
 
     public ClassArray(int size) {
         persons = new Person[size];
@@ -112,6 +112,18 @@ public class ClassArray {
             }
         }
     }
+
+    public void sortByFirstName() {
+        for (int i = 1; i < elemNumber; i++) {
+            Person buffer = persons[i];
+            int j = i;
+            while (j > 0 && persons[j - 1].getFirstName().compareTo(buffer.getFirstName()) > 0) {
+                persons[j] = persons[j - 1];
+                j--;
+            }
+            persons[j] = buffer;
+        }
+    }
 }
 
 class Person {
@@ -182,6 +194,10 @@ class ClassArrayUser
         array.delete("Max", "Payne");
         System.out.println();
 
+        array.displayAll();
+        System.out.println();
+
+        array.sortByFirstName();
         array.displayAll();
     }
 }

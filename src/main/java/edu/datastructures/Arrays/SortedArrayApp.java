@@ -3,10 +3,11 @@ package edu.datastructures.Arrays;
 
 public class SortedArrayApp {
     private long[] array;
-    private int numAmount = 0;
+    private int numAmount;
 
     SortedArrayApp(int size) {
         array = new long[size];
+        numAmount = 0;
     }
 
     public long[] fillWithRandoms(int numAmount) {
@@ -16,7 +17,7 @@ public class SortedArrayApp {
 
             add((long) (Math.random() * 100));
 
-            if (checker == this.numAmount) ;
+            if (checker == this.numAmount);
             else i++;
         }
         return array;
@@ -32,17 +33,12 @@ public class SortedArrayApp {
                     System.out.println(num + " is already defined in the array");
                     return;
                 } else {
-                    for (int i = numAmount; i > 0; i--) {
-                        if (array[i - 1] < num) {
-                            array[i] = num;
-                            break;
-                        } else {
-                            array[i] = array[i - 1];
-                            if (i == 1) {
-                                array[i - 1] = num;
-                            }
-                        }
+                    int i = numAmount;
+                    while (i > 0 && array[i-1] > num) {
+                        array[i] = array[i-1];
+                        i--;
                     }
+                    array[i] = num;
                 }
             } else {
                 array[numAmount] = num;
@@ -59,7 +55,6 @@ public class SortedArrayApp {
         int index = binarySearchRealisation(num, 0, numAmount - 1);
         if (index < 0) {
             System.out.println(num + " wasn't in the array");
-            return;
         } else {
             for (int i = index; i < numAmount - 1; i++) {
                 array[i] = array[i + 1];
