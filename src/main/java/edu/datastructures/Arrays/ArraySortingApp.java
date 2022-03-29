@@ -1,8 +1,9 @@
 package edu.datastructures.Arrays;
 
 
-public class ArraySortingApp
-{
+import java.util.Arrays;
+
+public class ArraySortingApp {
     private long[] array;
     private int numAmount;
 
@@ -12,21 +13,43 @@ public class ArraySortingApp
     }
 
     public void bubbleSort() {
-        for (int i = numAmount-1; i > 0; i--) {
+        for (int i = numAmount - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
-                if (array[j] > array[j+1]) {
+                if (array[j] > array[j + 1]) {
                     long buffer = array[j];
-                    array[j] = array[j+1];
-                    array[j+1] = buffer;
+                    array[j] = array[j + 1];
+                    array[j + 1] = buffer;
                 }
             }
+        }
+    }
+
+    public void bubbleSortBiDirected() {
+        int j, leftBoard, rightBoard = numAmount - 1;
+        for (leftBoard = 0; leftBoard < rightBoard; ) {
+            for (j = leftBoard; j < rightBoard; j++) {
+                if (array[j] > array[j + 1]) {
+                    long buffer = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = buffer;
+                }
+            }
+            rightBoard--;
+            for (j = rightBoard; j > leftBoard; j--) {
+                if (array[j] < array[j - 1]) {
+                    long buffer = array[j];
+                    array[j] = array[j - 1];
+                    array[j - 1] = buffer;
+                }
+            }
+            leftBoard++;
         }
     }
 
     public void selectionSort() {
         for (int i = 0; i < numAmount; i++) {
             int minIndex = i;
-            for (int j = i+1; j < numAmount; j++) {
+            for (int j = i + 1; j < numAmount; j++) {
                 if (array[j] < array[minIndex]) {
                     minIndex = j;
                 }
@@ -49,9 +72,53 @@ public class ArraySortingApp
         }
     }
 
+    public void primNotPrimSort() {
+        boolean sorted = false;
+        while (!sorted) {
+            int prim = 0;
+            while (prim < 2) {
+                for (int j = (prim % 2) == 0 ? 0 : 1; j < numAmount - 1; j += 2) {
+                    if (array[j] > array[j + 1]) {
+                        long buffer = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = buffer;
+                    }
+                }
+                prim++;
+            }
+            int i;
+            for (i = 0; i < numAmount - 1; i++) {
+                if (array[i] > array[i + 1]) {
+                    break;
+                }
+            }
+            if (i == numAmount - 1) {
+                sorted = true;
+            }
+        }
+    }
+
+    public void noDubs() {
+        for (int i = numAmount - 1; i > 0; i--) {
+            if(array[i] == array[i-1]) {
+                array[i] = -1;
+            }
+        }
+        int deleteCounter = 0;
+        for (int i = 0; i < numAmount - deleteCounter; i++) {
+            while (i + deleteCounter < numAmount && array[i + deleteCounter] == -1) {
+                deleteCounter++;
+            }
+            if (deleteCounter > 0 && i + deleteCounter < numAmount) {
+                array[i] = array[i + deleteCounter];
+            }
+        }
+        numAmount -= deleteCounter;
+    }
+
     public void fillWithRandoms(int numAmount) {
         for (int i = 0; i < numAmount; i++) {
-            add((long) (Math.random() * 1000000));
+            add((long) (Math.random() * 1000));
         }
     }
 
@@ -74,30 +141,47 @@ public class ArraySortingApp
         }
         System.out.println("]");
     }
+
+    public long median(){
+        if(array.length % 2 == 1) {
+            return array[array.length / 2];
+        } else {
+            return (array[array.length/2] + array[array.length/2 - 1]) / 2;
+        }
+    }
 }
 
-class ArraySortingAppUser
-{
+class ArraySortingAppUser {
     public static void main(String[] args) {
         ArraySortingApp array1 = new ArraySortingApp(30);
         ArraySortingApp array2 = new ArraySortingApp(30);
         ArraySortingApp array3 = new ArraySortingApp(30);
+        ArraySortingApp array4 = new ArraySortingApp(1000);
         array1.fillWithRandoms(30);
         array2.fillWithRandoms(30);
         array3.fillWithRandoms(30);
+        array4.fillWithRandoms(1000);
         array1.show("Array1");
         array2.show("Array2");
         array3.show("Array3");
+        array4.show("Array4");
         System.out.println();
 
         array1.bubbleSort();
         array1.show("Array1 sorted");
 
-        array2.selectionSort();
+        array2.insertSort();
         array2.show("Array2 sorted");
 
-        array3.insertSort();
+        array3.primNotPrimSort();
         array3.show("Array3 sorted");
+
+        array4.bubbleSortBiDirected();
+        array4.show("Array4 sorted w/ dubs");
+        System.out.println(array4.median());
+
+        array4.noDubs();
+        array4.show("Array4 sorted no dubs");
 
     }
 }
