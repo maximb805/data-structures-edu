@@ -54,12 +54,12 @@ public class ArrayDequeApp
         if (numAmount == 0)
             throw new StackException("Queue's empty");
 
-        long first = deque[rear--];
+        long last = deque[rear--];
         if(rear == -1) {
             rear = maxSize - 1;
         }
         numAmount--;
-        return first;
+        return last;
     }
 
     public long peekLeft() throws StackException {
@@ -114,6 +114,7 @@ class ArrayDequeAppUser
             System.out.println();
             while (!deque.isEmpty()) {
                 System.out.print(deque.removeLeft() + " ");
+                System.out.print(deque.removeRight() + " ");
             }
 
         }catch (StackException ex) {
