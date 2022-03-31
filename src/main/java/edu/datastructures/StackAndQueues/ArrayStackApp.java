@@ -1,7 +1,6 @@
 package edu.datastructures.StackAndQueues;
 
-public class ArrayStackApp
-{
+public class ArrayStackApp {
     private int maxSize;
     private long[] stack;
     private int top;
@@ -42,8 +41,7 @@ public class ArrayStackApp
     }
 }
 
-class ArrayStackAppUser
-{
+class ArrayStackAppUser {
     public static void main(String[] args) {
         ArrayStackApp stack1 = new ArrayStackApp(30);
 

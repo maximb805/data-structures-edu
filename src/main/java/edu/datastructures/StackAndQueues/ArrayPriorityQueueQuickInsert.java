@@ -1,7 +1,6 @@
 package edu.datastructures.StackAndQueues;
 
-public class ArrayPriorityQueueQuickInsert
-{
+public class ArrayPriorityQueueQuickInsert {
     private int maxSize;
     private long[] queue;
     private int front;
@@ -13,7 +12,7 @@ public class ArrayPriorityQueueQuickInsert
     }
 
     public void insert(long num) throws StackException {
-        if(front == maxSize - 1)
+        if (front == maxSize - 1)
             throw new StackException("Queue's full");
 
         queue[++front] = num;
@@ -66,14 +65,13 @@ public class ArrayPriorityQueueQuickInsert
     }
 }
 
-class ArrayPriorityQueueQuickInsertUser
-{
+class ArrayPriorityQueueQuickInsertUser {
     public static void main(String[] args) {
         ArrayPriorityQueueQuickInsert priorityQueue = new ArrayPriorityQueueQuickInsert(30);
 
         try {
             while (!priorityQueue.isFull()) {
-                long a = (long)(Math.random()*100);
+                long a = (long) (Math.random() * 100);
                 System.out.print(a + " ");
                 priorityQueue.insert(a);
             }
@@ -85,7 +83,7 @@ class ArrayPriorityQueueQuickInsertUser
             }
             System.out.println();
             priorityQueue.display();
-        }catch (StackException ex) {
+        } catch (StackException ex) {
             System.out.println(ex.getMessage());
         }
     }

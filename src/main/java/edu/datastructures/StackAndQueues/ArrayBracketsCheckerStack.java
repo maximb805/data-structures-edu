@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ArrayBracketsCheckerStack
-{
+public class ArrayBracketsCheckerStack {
     private int maxSize;
     private char[] stack;
     private int top;
@@ -46,8 +45,7 @@ public class ArrayBracketsCheckerStack
     }
 }
 
-class BracketChecker
-{
+class BracketChecker {
     private String input;
 
     BracketChecker(String input) {
@@ -72,8 +70,8 @@ class BracketChecker
                         if (!stack.isEmpty()) {
                             char chx = stack.pop();
                             if (chx == '{' && ch != '}' ||
-                                chx == '[' && ch != ']' ||
-                                chx == '(' && ch != ')' ) {
+                                    chx == '[' && ch != ']' ||
+                                    chx == '(' && ch != ')') {
                                 System.err.println("Error: " + ch + " on " + chx + " at " + i);
                             }
                         } else {
@@ -96,8 +94,7 @@ class BracketChecker
     }
 }
 
-class ArrayBracketCheckerUser
-{
+class ArrayBracketCheckerUser {
     public static void main(String[] args) throws IOException {
         while (true) {
             System.out.println("Enter string containing delimiters: ");

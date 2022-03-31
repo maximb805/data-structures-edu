@@ -1,7 +1,6 @@
 package edu.datastructures.StackAndQueues;
 
-public class ArrayQueueApp
-{
+public class ArrayQueueApp {
     private int maxSize;
     private long[] queue;
     private int rear;
@@ -17,14 +16,14 @@ public class ArrayQueueApp
     }
 
     public void insert(long num) throws StackException {
-        if(numAmount == maxSize)
+        if (numAmount == maxSize)
             throw new StackException("Queue's full");
 
         if (rear == maxSize - 1) {
             rear = -1;
         }
         queue[++rear] = num;
-        numAmount ++;
+        numAmount++;
     }
 
     public long remove() throws StackException {
@@ -32,7 +31,7 @@ public class ArrayQueueApp
             throw new StackException("Queue's empty");
 
         long first = queue[front++];
-        if(front == maxSize) {
+        if (front == maxSize) {
             front = 0;
         }
         numAmount--;
@@ -54,23 +53,24 @@ public class ArrayQueueApp
         return numAmount == 0;
     }
 
-    public synchronized void display(String threadName) {
+    public void display(String num) {
         int startPos = front;
-
-        System.out.print("Queue nums " + threadName + ": [");
+        String result;
+        result = "Queue nums " + num + ": [";
         for (int i = 0; i < numAmount; i++) {
             if (startPos + i == maxSize)
                 startPos = -i;
             if (i == numAmount - 1) {
-                System.out.print(queue[startPos + i]);
+                result += queue[startPos + i];
                 break;
             }
-            System.out.print(queue[startPos + i] + ", ");
+            result += queue[startPos + i] + ", ";
         }
-        System.out.println("]");
+        result += "]";
+        System.out.println(result);
     }
 
-    public synchronized long getSum() {
+    public long getSum() {
         if (isFull())
             return -1;
         int startPos = front;
@@ -84,8 +84,7 @@ public class ArrayQueueApp
     }
 }
 
-class ArrayQueueAppUser
-{
+class ArrayQueueAppUser {
     public static void main(String[] args) {
         ArrayQueueApp queue = new ArrayQueueApp(30);
 
@@ -112,7 +111,7 @@ class ArrayQueueAppUser
             }
             System.out.println();
 
-            queue.display(Thread.currentThread().getName());
+            queue.display("1");
             System.out.println();
 
             while (!queue.isEmpty()) {
@@ -120,7 +119,7 @@ class ArrayQueueAppUser
             }
             System.out.println();
 
-            queue.display(Thread.currentThread().getName());
+            queue.display("1");
 
             while (!queue.isEmpty()) {
                 System.out.print(queue.remove() + " ");

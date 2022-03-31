@@ -1,7 +1,6 @@
 package edu.datastructures.StackAndQueues;
 
-public class StackOnDeque
-{
+public class StackOnDeque {
     ArrayDequeApp deque;
 
     StackOnDeque(int size) {

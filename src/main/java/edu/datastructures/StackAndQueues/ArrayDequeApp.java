@@ -1,7 +1,6 @@
 package edu.datastructures.StackAndQueues;
 
-public class ArrayDequeApp
-{
+public class ArrayDequeApp {
     private int maxSize;
     private long[] deque;
     private int rear;
@@ -17,25 +16,25 @@ public class ArrayDequeApp
     }
 
     public void insertLeft(long num) throws StackException {
-        if(numAmount == maxSize)
+        if (numAmount == maxSize)
             throw new StackException("Queue's full");
 
         if (front == 0) {
             front = maxSize;
         }
         deque[--front] = num;
-        numAmount ++;
+        numAmount++;
     }
 
     public void insertRight(long num) throws StackException {
-        if(numAmount == maxSize)
+        if (numAmount == maxSize)
             throw new StackException("Queue's full");
 
         if (rear == maxSize - 1) {
             rear = -1;
         }
         deque[++rear] = num;
-        numAmount ++;
+        numAmount++;
     }
 
     public long removeLeft() throws StackException {
@@ -43,7 +42,7 @@ public class ArrayDequeApp
             throw new StackException("Queue's empty");
 
         long first = deque[front++];
-        if(front == maxSize) {
+        if (front == maxSize) {
             front = 0;
         }
         numAmount--;
@@ -55,7 +54,7 @@ public class ArrayDequeApp
             throw new StackException("Queue's empty");
 
         long last = deque[rear--];
-        if(rear == -1) {
+        if (rear == -1) {
             rear = maxSize - 1;
         }
         numAmount--;
@@ -96,16 +95,15 @@ public class ArrayDequeApp
     }
 }
 
-class ArrayDequeAppUser
-{
+class ArrayDequeAppUser {
     public static void main(String[] args) {
         ArrayDequeApp deque = new ArrayDequeApp(30);
 
         deque.show();
         try {
             while (!deque.isFull()) {
-                long a = (long)(Math.random()*100);
-                long b = (long)(Math.random()*100);
+                long a = (long) (Math.random() * 100);
+                long b = (long) (Math.random() * 100);
                 System.out.print(a + " ");
                 deque.insertLeft(a);
                 System.out.println(b + " ");
@@ -117,7 +115,7 @@ class ArrayDequeAppUser
                 System.out.print(deque.removeRight() + " ");
             }
 
-        }catch (StackException ex) {
+        } catch (StackException ex) {
             System.out.println(ex.getMessage());
         }
     }

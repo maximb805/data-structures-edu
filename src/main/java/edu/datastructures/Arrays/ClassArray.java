@@ -89,8 +89,8 @@ public class ClassArray {
         } else {
             for (int i = 0; i < elemNumber; i++) {
                 if (persons[i].getLastName().equals(lastName)) {
-                    for(int j = i; j < elemNumber - 1; j++) {
-                        persons[j] = persons[j+1];
+                    for (int j = i; j < elemNumber - 1; j++) {
+                        persons[j] = persons[j + 1];
                     }
                     elemNumber--;
                 }
@@ -104,8 +104,8 @@ public class ClassArray {
         } else {
             for (int i = 0; i < elemNumber; i++) {
                 if (persons[i].getLastName().equals(lastName) && persons[i].getFirstName().equals(firstName)) {
-                    for(int j = i; j < elemNumber - 1; j++) {
-                        persons[j] = persons[j+1];
+                    for (int j = i; j < elemNumber - 1; j++) {
+                        persons[j] = persons[j + 1];
                     }
                     elemNumber--;
                 }
@@ -154,8 +154,7 @@ class Person {
     }
 }
 
-class ClassArrayUser
-{
+class ClassArrayUser {
     public static void main(String[] args) {
         ClassArray array = new ClassArray(50);
         Person person = new Person("Nicolas", "Cage", LocalDate.of(1964, 1, 7));

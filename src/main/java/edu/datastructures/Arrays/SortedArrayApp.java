@@ -17,7 +17,7 @@ public class SortedArrayApp {
 
             add((long) (Math.random() * 100));
 
-            if (checker == this.numAmount);
+            if (checker == this.numAmount) ;
             else i++;
         }
         return array;
@@ -34,8 +34,8 @@ public class SortedArrayApp {
                     return;
                 } else {
                     int i = numAmount;
-                    while (i > 0 && array[i-1] > num) {
-                        array[i] = array[i-1];
+                    while (i > 0 && array[i - 1] > num) {
+                        array[i] = array[i - 1];
                         i--;
                     }
                     array[i] = num;

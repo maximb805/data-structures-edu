@@ -100,7 +100,7 @@ public class ArraySortingApp {
 
     public void noDubs() {
         for (int i = numAmount - 1; i > 0; i--) {
-            if(array[i] == array[i-1]) {
+            if (array[i] == array[i - 1]) {
                 array[i] = -1;
             }
         }
@@ -142,11 +142,11 @@ public class ArraySortingApp {
         System.out.println("]");
     }
 
-    public long median(){
-        if(array.length % 2 == 1) {
+    public long median() {
+        if (array.length % 2 == 1) {
             return array[array.length / 2];
         } else {
-            return (array[array.length/2] + array[array.length/2 - 1]) / 2;
+            return (array[array.length / 2] + array[array.length / 2 - 1]) / 2;
         }
     }
 }

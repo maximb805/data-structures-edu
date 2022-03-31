@@ -3,8 +3,7 @@ package edu.datastructures.StackAndQueues;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class InfixToPostfix
-{
+public class InfixToPostfix {
     private String expression;
     private String postfixExpression;
     private ArrayBracketsCheckerStack operatorsStack;
@@ -60,7 +59,7 @@ public class InfixToPostfix
     }
 
     //только для однозначных чисел
-    public long calculatePostfix() throws Exception{
+    public long calculatePostfix() throws Exception {
         convert();
         long num;
         for (int i = 0; i < postfixExpression.length(); i++) {
@@ -82,15 +81,15 @@ public class InfixToPostfix
                     num = numStack.pop();
                     numStack.push(numStack.pop() / num);
                     break;
-                default: numStack.push(thisElem - '0');
+                default:
+                    numStack.push(thisElem - '0');
             }
         }
         return numStack.pop();
     }
 }
 
-class InfixToPostfixUser
-{
+class InfixToPostfixUser {
     public static void main(String[] args) throws Exception {
         InfixToPostfix ip1 = new InfixToPostfix("A + B * (C - D/(E + F))");
         System.out.println(ip1.convert());
