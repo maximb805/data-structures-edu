@@ -13,16 +13,16 @@ public class TwoSidedLinkedListApp {
         return first == null;
     }
 
-    public void insertFirst(int intD, double doubleD) {
-        Link newLink = new Link(intD, doubleD);
+    public void insertFirst(int intD) {
+        Link newLink = new Link(intD);
         if (isEmpty())
             last = newLink;
         newLink.setNext(first);
         first = newLink;
     }
 
-    public void insertLast(int intD, double doubleD) {
-        Link newLink = new Link(intD, doubleD);
+    public void insertLast(int intD) {
+        Link newLink = new Link(intD);
         if (isEmpty())
             first = newLink;
         else
@@ -56,30 +56,16 @@ public class TwoSidedLinkedListApp {
 class TwoSidedLinkedListAppUser {
     public static void main(String[] args) {
         TwoSidedLinkedListApp list = new TwoSidedLinkedListApp();
-        list.insertFirst(17, 17.0);
-        list.insertFirst(16, 16.0);
-        list.insertFirst(15, 15.0);
-        list.insertLast(18, 18.0);
-        list.insertLast(19, 19.0);
-        list.insertLast(20, 20.0);
+        list.insertFirst(17);
+        list.insertFirst(16);
+        list.insertFirst(15);
+        list.insertLast(18);
+        list.insertLast(19);
+        list.insertLast(20);
         list.displayList();
 
         list.deleteFirst();
         list.deleteFirst();
         list.displayList();
-
-//        Link lastLink = list.deleteLast();
-//        lastLink.displayLink();
-//        System.out.println();
-//
-//        list.displayList();
-//
-//        list.deleteByIntData(16);
-//
-//        list.displayList();
-//
-//        Link link = list.findByIntData(10);
-//        System.out.println(link);
-//        list.findByIntData(17).displayLink();
     }
 }

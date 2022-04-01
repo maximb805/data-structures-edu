@@ -11,14 +11,14 @@ public class LinkedListApp {
         return first == null;
     }
 
-    public void insertFirst(int intData, double doubleData) {
-        Link newLink = new Link(intData, doubleData);
+    public void insertFirst(int intData) {
+        Link newLink = new Link(intData);
         newLink.setNext(first);
         first = newLink;
     }
 
-    public void insertLast(int intData, double doubleData) {
-        Link newLink = new Link(intData, doubleData);
+    public void insertLast(int intData) {
+        Link newLink = new Link(intData);
         if (!isEmpty()) {
             Link last = first;
             while (last.getNext() != null) {
@@ -61,11 +61,11 @@ public class LinkedListApp {
         }
     }
 
-    public Link deleteByIntData(int intData) {
+    public Link deleteByData(int intData) {
         if (!isEmpty()) {
             Link current = first;
             Link prev = first;
-            while (current.getIntData() != intData) {
+            while (current.getData() != intData) {
                 if (current.getNext() == null)
                     return null;
                 else {
@@ -84,10 +84,10 @@ public class LinkedListApp {
         }
     }
 
-    public Link findByIntData(int intData) {
+    public Link findByData(int intData) {
         if (!isEmpty()) {
             Link current = first;
-            while (current.getIntData() != intData) {
+            while (current.getData() != intData) {
                 if (current.getNext() == null)
                     return null;
                 else {
@@ -113,20 +113,15 @@ public class LinkedListApp {
 
 class Link {
     private int intData;
-    private double doubleData;
     private Link next;
+    private Link prev;
 
-    Link(int intData, double doubleData) {
+    Link(int intData) {
         this.intData = intData;
-        this.doubleData = doubleData;
     }
 
     public void displayLink() {
-        if (!(this == null)) {
-            System.out.print("{" + intData + ", " + doubleData + "} ");
-        } else {
-            System.out.println("there's no such element in the list");
-        }
+        System.out.print("{" + intData + "} ");
     }
 
     public Link getNext() {
@@ -137,32 +132,32 @@ class Link {
         this.next = next;
     }
 
-    public int getIntData() {
+    public int getData() {
         return intData;
     }
 
-    public void setIntData(int intData) {
+    public void setData(int intData) {
         this.intData = intData;
     }
 
-    public double getDoubleData() {
-        return doubleData;
+    public Link getPrev() {
+        return prev;
     }
 
-    public void setDoubleData(double doubleData) {
-        this.doubleData = doubleData;
+    public void setPrev(Link prev) {
+        this.prev = prev;
     }
 }
 
 class LinkedListAppUSer {
     public static void main(String[] args) {
         LinkedListApp list = new LinkedListApp();
-        list.insertFirst(15, 15.0);
-        list.insertFirst(16, 16.0);
-        list.insertFirst(17, 17.0);
-        list.insertFirst(18, 18.0);
-        list.insertFirst(19, 19.0);
-        list.insertLast(20, 20.0);
+        list.insertFirst(15);
+        list.insertFirst(16);
+        list.insertFirst(17);
+        list.insertFirst(18);
+        list.insertFirst(19);
+        list.insertLast(20);
 
         list.displayList();
 
@@ -172,12 +167,12 @@ class LinkedListAppUSer {
 
         list.displayList();
 
-        list.deleteByIntData(16);
+        list.deleteByData(16);
 
         list.displayList();
 
-        Link link = list.findByIntData(10);
+        Link link = list.findByData(10);
         System.out.println(link);
-        list.findByIntData(17).displayLink();
+        list.findByData(17).displayLink();
     }
 }

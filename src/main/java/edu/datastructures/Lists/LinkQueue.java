@@ -7,8 +7,8 @@ public class LinkQueue {
         list = new TwoSidedLinkedListApp();
     }
 
-    public void insert(int intD, double doubleD) {
-        list.insertLast(intD, doubleD);
+    public void insert(int intD) {
+        list.insertLast(intD);
     }
 
     public Link remove() {
@@ -29,12 +29,12 @@ class LinkQueueUser {
     public static void main(String[] args) {
 
         LinkQueue queue = new LinkQueue();
-        queue.insert(15, 15.0);
-        queue.insert(16, 16.0);
-        queue.insert(17, 17.0);
-        queue.insert(18, 18.0);
-        queue.insert(19, 19.0);
-        queue.insert(20, 20.0);
+        queue.insert(15);
+        queue.insert(16);
+        queue.insert(17);
+        queue.insert(18);
+        queue.insert(19);
+        queue.insert(20);
         queue.displayQueue();
 
         while (!queue.isEmpty()) {
