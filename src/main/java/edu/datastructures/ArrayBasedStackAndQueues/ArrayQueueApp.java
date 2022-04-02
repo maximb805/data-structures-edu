@@ -1,4 +1,4 @@
-package edu.datastructures.StackAndQueues;
+package edu.datastructures.ArrayBasedStackAndQueues;
 
 public class ArrayQueueApp {
     private int maxSize;

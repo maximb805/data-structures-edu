@@ -1,11 +1,11 @@
-package edu.datastructures.StackAndQueues;
+package edu.datastructures.ArrayBasedStackAndQueues;
 
-public class ArrayPriorityQueueQuickInsert {
+public class ArrayPriorityQueue {
     private int maxSize;
     private long[] queue;
     private int front;
 
-    public ArrayPriorityQueueQuickInsert(int size) {
+    public ArrayPriorityQueue(int size) {
         maxSize = size;
         queue = new long[maxSize];
         front = -1;
@@ -15,27 +15,20 @@ public class ArrayPriorityQueueQuickInsert {
         if (front == maxSize - 1)
             throw new StackException("Queue's full");
 
-        queue[++front] = num;
+        int j = front + 1;
+        while (j > 0 && queue[j - 1] < num) {
+            queue[j] = queue[j - 1];
+            j--;
+        }
+        queue[j] = num;
+        front++;
     }
 
     public long remove() throws StackException {
         if (front == -1)
             throw new StackException("Queue's empty");
 
-        long min = queue[0];
-        int minIndex = 0;
-        for (int i = 1; i <= front; i++) {
-            if (queue[i] < min) {
-                min = queue[i];
-                minIndex = i;
-            }
-        }
-        for (int i = minIndex; i < front; i++) {
-            queue[i] = queue[i + 1];
-        }
-        front--;
-
-        return min;
+        return queue[front--];
     }
 
     public long peek() throws StackException {
@@ -52,22 +45,11 @@ public class ArrayPriorityQueueQuickInsert {
     public boolean isEmpty() {
         return front == -1;
     }
-
-    public void display() {
-        System.out.print("[");
-        for (int i = 0; i <= front; i++) {
-            if (i == front)
-                System.out.print(queue[i]);
-            else
-                System.out.print(queue[i] + ", ");
-        }
-        System.out.println("]");
-    }
 }
 
-class ArrayPriorityQueueQuickInsertUser {
+class ArrayPriorityQueueUser {
     public static void main(String[] args) {
-        ArrayPriorityQueueQuickInsert priorityQueue = new ArrayPriorityQueueQuickInsert(30);
+        ArrayPriorityQueue priorityQueue = new ArrayPriorityQueue(30);
 
         try {
             while (!priorityQueue.isFull()) {
@@ -76,13 +58,10 @@ class ArrayPriorityQueueQuickInsertUser {
                 priorityQueue.insert(a);
             }
             System.out.println();
-            priorityQueue.display();
-
             while (!priorityQueue.isEmpty()) {
                 System.out.print(priorityQueue.remove() + " ");
             }
-            System.out.println();
-            priorityQueue.display();
+
         } catch (StackException ex) {
             System.out.println(ex.getMessage());
         }

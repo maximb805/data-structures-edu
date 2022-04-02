@@ -1,4 +1,4 @@
-package edu.datastructures.StackAndQueues;
+package edu.datastructures.ArrayBasedStackAndQueues;
 
 class StackException extends Exception {
     public StackException() {

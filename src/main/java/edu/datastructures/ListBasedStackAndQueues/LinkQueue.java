@@ -1,4 +1,7 @@
-package edu.datastructures.Lists;
+package edu.datastructures.ListBasedStackAndQueues;
+
+import edu.datastructures.Lists.Link;
+import edu.datastructures.Lists.TwoSidedLinkedListApp;
 
 public class LinkQueue {
     private TwoSidedLinkedListApp list;

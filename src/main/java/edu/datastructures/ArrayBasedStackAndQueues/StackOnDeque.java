@@ -1,49 +1,36 @@
-package edu.datastructures.StackAndQueues;
+package edu.datastructures.ArrayBasedStackAndQueues;
 
-public class ArrayStackApp {
-    private int maxSize;
-    private long[] stack;
-    private int top;
+public class StackOnDeque {
+    ArrayDequeApp deque;
 
-    public ArrayStackApp(int size) {
-        maxSize = size;
-        stack = new long[maxSize];
-        top = -1;
+    StackOnDeque(int size) {
+        deque = new ArrayDequeApp(size);
     }
 
     public void push(long num) throws StackException {
-        if (top == maxSize - 1)
-            throw new StackException("Stack's full");
-
-        stack[++top] = num;
+        deque.insertRight(num);
     }
 
     public long pop() throws StackException {
-        if (top < 0)
-            throw new StackException("Stack's empty");
-
-        return stack[top--];
+        return deque.removeRight();
     }
 
     public long peek() throws StackException {
-        if (top < 0)
-            throw new StackException("Stack's empty");
-
-        return stack[top];
+        return deque.peekRight();
     }
 
     public boolean isFull() {
-        return top == maxSize - 1;
+        return deque.isFull();
     }
 
     public boolean isEmpty() {
-        return top == -1;
+        return deque.isEmpty();
     }
 }
 
-class ArrayStackAppUser {
+class StackOnDequeUser {
     public static void main(String[] args) {
-        ArrayStackApp stack1 = new ArrayStackApp(30);
+        StackOnDeque stack1 = new StackOnDeque(30);
 
         try {
             stack1.push(12);

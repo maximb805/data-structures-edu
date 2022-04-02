@@ -2,7 +2,6 @@ package edu.datastructures.Lists;
 
 import java.util.Arrays;
 
-//Sorting by intData
 public class SortedListApp {
     private Link first;
 
@@ -10,7 +9,7 @@ public class SortedListApp {
         first = null;
     }
 
-    SortedListApp(int[] array) {
+    public SortedListApp(int[] array) {
         first = null;
         for (int i = 0; i < array.length; i++) {
             insert(array[i]);
@@ -95,6 +94,10 @@ public class SortedListApp {
             current = current.getNext();
         }
         System.out.println();
+    }
+
+    public Link getFirst() {
+        return first;
     }
 }
 

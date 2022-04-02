@@ -1,6 +1,5 @@
 package edu.datastructures.Arrays;
 
-
 public class ArrayApp {
     private long[] array;
     private int numAmount;

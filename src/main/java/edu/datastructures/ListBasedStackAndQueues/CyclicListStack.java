@@ -1,18 +1,22 @@
-package edu.datastructures.Lists;
+package edu.datastructures.ListBasedStackAndQueues;
 
-public class LinkStack {
-    private LinkedListApp list;
+import edu.datastructures.Lists.CyclicListApp;
+import edu.datastructures.Lists.Link;
 
-    LinkStack() {
-        list = new LinkedListApp();
+public class CyclicListStack
+{
+    private CyclicListApp list;
+
+    CyclicListStack() {
+        list = new CyclicListApp();
     }
 
     public void push(int intD) {
-        list.insertFirst(intD);
+        list.insert(intD);
     }
 
     public Link pop() {
-        return list.deleteFirst();
+        return list.deleteNext();
     }
 
     public boolean isEmpty() {
@@ -25,9 +29,10 @@ public class LinkStack {
     }
 }
 
-class LinkStackUser {
+class CyclicListStackUser {
     public static void main(String[] args) {
-        LinkStack stack = new LinkStack();
+
+        CyclicListStack stack = new CyclicListStack();
         stack.push(15);
         stack.push(16);
         stack.push(17);

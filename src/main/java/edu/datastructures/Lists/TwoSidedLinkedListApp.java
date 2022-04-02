@@ -51,6 +51,14 @@ public class TwoSidedLinkedListApp {
             return null;
         }
     }
+
+    public Link getFirst() {
+        return first;
+    }
+
+    public Link getLast() {
+        return last;
+    }
 }
 
 class TwoSidedLinkedListAppUser {

@@ -8,7 +8,7 @@ public class TwoDirectedListApp {
     private Link first;
     private Link last;
 
-    TwoDirectedListApp() {
+    public TwoDirectedListApp() {
         first = null;
         last = null;
     }
@@ -177,73 +177,80 @@ public class TwoDirectedListApp {
 }
 
 class TwoDirectedListAppUser {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         TwoDirectedListApp list = new TwoDirectedListApp();
         ListIterator iterator = list.getIterator();
         list.insertFirst(5);
+        boolean breaker = true;
 
-        while (true) {
+        while (breaker) {
             System.out.println();
-            System.out.print("Enter first letter of: show, reset, next, previous, get, before, after, delete : ");
+            System.out.print("Enter first letter of: show, reset, next, previous, get, before, after, delete or just Enter to exit: ");
             System.out.flush();
 
-            int choice = getChar();
+            String choice = getChar();
             int value;
             switch (choice) {
-                case 's':
+                case "s":
                     list.displayForward();
                     break;
-                case 'r':
+                case "r":
                     System.out.println("Reset. Current at first.");
                     iterator.reset();
                     break;
-                case 'n':
+                case "n":
                     System.out.print("Setting current on next... ");
                     iterator.nextLink();
                     System.out.println();
                     break;
-                case 'p':
+                case "p":
                     System.out.print("Setting current on previous... ");
                     iterator.prevLink();
                     System.out.println();
                     break;
-                case 'g':
+                case "g":
                     iterator.getCurrent().displayLink();
                     System.out.println();
                     break;
-                case 'b':
+                case "b":
                     System.out.print("Write int value to insert: ");
                     System.out.flush();
                     value = getInt();
-                    System.out.print("Inserting: ");
+                    System.out.print("Inserting... ");
                     iterator.insertBefore(value);
                     System.out.println();
                     break;
-                case 'a':
+                case "a":
                     System.out.print("Write int value to insert: ");
                     System.out.flush();
                     value = getInt();
-                    System.out.print("Inserting: ");
+                    System.out.print("Inserting... ");
                     iterator.insertAfter(value);
                     System.out.println();
                     break;
-                case 'd':
-                    System.out.println("Deleting: ");
+                case "d":
+                    System.out.println("Deleting... ");
                     iterator.deleteCurrent();
+                    break;
+                case "":
+                    breaker = false;
+                    System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Wrong command");
             }
         }
     }
+
     public static String getString() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         return br.readLine();
     }
 
-    public static char getChar() throws IOException {
-        return getString().charAt(0);
+    public static String getChar() throws IOException {
+        String s = getString();
+        return s.equals("") ? "" : Character.toString(s.charAt(0));
     }
 
     public static int getInt() throws IOException {
