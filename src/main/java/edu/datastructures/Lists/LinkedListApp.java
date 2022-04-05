@@ -1,7 +1,7 @@
 package edu.datastructures.Lists;
 
-public class LinkedListApp {
-    private Link first;
+public class LinkedListApp<T> {
+    private Link<T> first;
 
     public LinkedListApp() {
         first = null;
@@ -11,16 +11,16 @@ public class LinkedListApp {
         return first == null;
     }
 
-    public void insertFirst(int intData) {
-        Link newLink = new Link(intData);
+    public void insertFirst(T data) {
+        Link<T> newLink = new Link<>(data);
         newLink.setNext(first);
         first = newLink;
     }
 
-    public void insertLast(int intData) {
-        Link newLink = new Link(intData);
+    public void insertLast(T data) {
+        Link<T> newLink = new Link<>(data);
         if (!isEmpty()) {
-            Link last = first;
+            Link<T> last = first;
             while (last.getNext() != null) {
                 last = last.getNext();
             }
@@ -30,9 +30,9 @@ public class LinkedListApp {
         }
     }
 
-    public Link deleteFirst() {
+    public Link<T> deleteFirst() {
         if (!isEmpty()) {
-            Link temp = first;
+            Link<T> temp = first;
             first = first.getNext();
             return temp;
         } else {
@@ -41,10 +41,10 @@ public class LinkedListApp {
         }
     }
 
-    public Link deleteLast() {
+    public Link<T> deleteLast() {
         if (!isEmpty()) {
-            Link current = first;
-            Link prev = null;
+            Link<T> current = first;
+            Link<T> prev = null;
             while (current.getNext() != null) {
                 prev = current;
                 current = current.getNext();
@@ -61,11 +61,11 @@ public class LinkedListApp {
         }
     }
 
-    public Link deleteByData(int intData) {
+    public Link<T> deleteByData(T data) {
         if (!isEmpty()) {
-            Link current = first;
-            Link prev = first;
-            while (current.getData() != intData) {
+            Link<T> current = first;
+            Link<T> prev = first;
+            while (!current.getData().equals(data)) {
                 if (current.getNext() == null)
                     return null;
                 else {
@@ -84,10 +84,10 @@ public class LinkedListApp {
         }
     }
 
-    public Link findByData(int intData) {
+    public Link<T> findByData(T data) {
         if (!isEmpty()) {
-            Link current = first;
-            while (current.getData() != intData) {
+            Link<T> current = first;
+            while (!current.getData().equals(data)) {
                 if (current.getNext() == null)
                     return null;
                 else {
@@ -102,7 +102,7 @@ public class LinkedListApp {
     }
 
     public void displayList() {
-        Link current = first;
+        Link<T> current = first;
         while (current != null) {
             current.displayLink();
             current = current.getNext();
@@ -110,14 +110,14 @@ public class LinkedListApp {
         System.out.println();
     }
 
-    public Link getFirst() {
+    public Link<T> getFirst() {
         return first;
     }
 }
 
 class LinkedListAppUSer {
     public static void main(String[] args) {
-        LinkedListApp list = new LinkedListApp();
+        LinkedListApp<Integer> list = new LinkedListApp<>();
         list.insertFirst(15);
         list.insertFirst(16);
         list.insertFirst(17);
@@ -127,7 +127,7 @@ class LinkedListAppUSer {
 
         list.displayList();
 
-        Link lastLink = list.deleteLast();
+        Link<Integer> lastLink = list.deleteLast();
         lastLink.displayLink();
         System.out.println();
 
@@ -137,7 +137,7 @@ class LinkedListAppUSer {
 
         list.displayList();
 
-        Link link = list.findByData(10);
+        Link<Integer> link = list.findByData(10);
         System.out.println(link);
         list.findByData(17).displayLink();
     }

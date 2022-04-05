@@ -1,10 +1,10 @@
 package edu.datastructures.Lists;
 
-public class ListIterator {
-    private Link current;
-    private TwoDirectedListApp list;
+public class ListIterator<T> {
+    private Link<T> current;
+    private TwoDirectedListApp<T> list;
 
-    ListIterator(TwoDirectedListApp list) {
+    ListIterator(TwoDirectedListApp<T> list) {
         this.list = list;
         reset();
     }
@@ -27,11 +27,11 @@ public class ListIterator {
             current = current.getPrev();
     }
 
-    public void insertAfter(int intData) {
+    public void insertAfter(T data) {
         if (current == null) {
             System.out.print("\"current\" == null");
         } else {
-            Link newLink = new Link(intData);
+            Link<T> newLink = new Link<>(data);
             if (current.getNext() != null) {
                 current.getNext().setPrev(newLink);
                 newLink.setNext(current.getNext());
@@ -43,11 +43,11 @@ public class ListIterator {
         }
     }
 
-    public void insertBefore(int intData) {
+    public void insertBefore(T data) {
         if (current == null) {
             System.out.print("\"current\" == null");
         } else {
-            Link newLink = new Link(intData);
+            Link<T> newLink = new Link<>(data);
             if (current.getPrev() != null) {
                 current.getPrev().setNext(newLink);
                 newLink.setPrev(current.getPrev());
@@ -59,12 +59,12 @@ public class ListIterator {
         }
     }
 
-    public int deleteCurrent() {
+    public T deleteCurrent() {
         if (current == null) {
             System.out.print("\"current\" == null");
-            return -1;
+            return null;
         } else {
-            int val = current.getData();
+            T val = current.getData();
             if (current.getPrev() == null)
                 list.setFirst(current.getNext());
             else
@@ -84,7 +84,7 @@ public class ListIterator {
         }
     }
 
-    public Link getCurrent() {
+    public Link<T> getCurrent() {
         return current;
     }
 
@@ -92,7 +92,7 @@ public class ListIterator {
         return current.getNext() == null;
     }
 
-    public void setCurrent(Link current) {
+    public void setCurrent(Link<T> current) {
         this.current = current;
     }
 

@@ -27,7 +27,6 @@ public class MergeSortingApp {
         System.out.println("]");
     }
 
-
     public void sortArray() {
         int leftBound = 0;
         int rightBound = array.length - 1;

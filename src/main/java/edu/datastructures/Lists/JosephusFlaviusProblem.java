@@ -28,7 +28,7 @@ public class JosephusFlaviusProblem
     }
 
     public int getSolution() {
-        int solution;
+        Integer solution;
         for(int i = 0; i < manCount - 1; i++) {
             for (int j = 1; j < step; j++) {
                 list.step();
@@ -36,7 +36,7 @@ public class JosephusFlaviusProblem
             list.deleteNext();
             list.step();
         }
-        solution = list.getCurrent().getData();
+        solution = (Integer) list.getCurrent().getData();
         return solution;
     }
 }

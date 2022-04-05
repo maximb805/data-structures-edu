@@ -1,9 +1,9 @@
 package edu.datastructures.Lists;
 
 //one directed
-public class CyclicListApp
+public class CyclicListApp<T>
 {
-    private Link current;
+    private Link<T> current;
 
     public CyclicListApp() {
         current = null;
@@ -13,8 +13,8 @@ public class CyclicListApp
         return current == null;
     }
 
-    public void insert(int intData) {
-        Link newLink = new Link(intData);
+    public void insert(T data) {
+        Link<T> newLink = new Link<>(data);
         if(!isEmpty()) {
             newLink.setNext(current.getNext());
             current.setNext(newLink);
@@ -24,9 +24,9 @@ public class CyclicListApp
         }
     }
 
-    public Link deleteNext() {
+    public Link<T> deleteNext() {
         if (!isEmpty()) {
-            Link temp = current.getNext();
+            Link<T> temp = current.getNext();
             if(temp == current) {
                 current = null;
             } else {
@@ -39,36 +39,36 @@ public class CyclicListApp
         }
     }
 
-    public Link deleteByData(int intData) {
+    public Link<T> deleteByData(T data) {
         if (!isEmpty()) {
-            if (current.getNext().getData() == intData)
+            if (current.getNext().getData().equals(data))
                 return deleteNext();
             Link marker = current;
             current = current.getNext();
             while (current != marker) {
-                if (current.getNext().getData() == intData)
+                if (current.getNext().getData().equals(data))
                     return deleteNext();
                 current = current.getNext();
             }
-            System.out.println(intData + " not found");
+            System.out.println(data + " not found");
         } else {
             System.out.println("List's empty");
         }
         return null;
     }
 
-    public Link find(int intData) {
+    public Link<T> find(T data) {
         if (!isEmpty()) {
-            if (current.getData() == intData)
+            if (current.getData().equals(data))
                 return current;
             Link marker = current;
             current = current.getNext();
             while (current != marker) {
-                if (current.getData() == intData)
+                if (current.getData().equals(data))
                     return current;
                 current = current.getNext();
             }
-            System.out.println(intData + " not found");
+            System.out.println(data + " not found");
         } else {
             System.out.println("List's empty");
         }
@@ -84,7 +84,7 @@ public class CyclicListApp
     public void displayList() {
         if (isEmpty())
             return;
-        Link marker = current;
+        Link<T> marker = current;
         marker.displayLink();
         current = current.getNext();
         while (current != marker) {
@@ -94,14 +94,14 @@ public class CyclicListApp
         System.out.println();
     }
 
-    public Link getCurrent() {
+    public Link<T> getCurrent() {
         return current;
     }
 }
 
 class CyclicListAppUser {
     public static void main(String[] args) {
-        CyclicListApp list = new CyclicListApp();
+        CyclicListApp<Integer> list = new CyclicListApp<>();
         list.displayList();
         list.insert(10);
         list.insert(20);

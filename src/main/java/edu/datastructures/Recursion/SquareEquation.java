@@ -116,7 +116,7 @@ public class SquareEquation {
             }
         }
 
-        //ниже тест работы вичислителя корней
+        //ниже тест работы вычислителя корней
         double count = -256;
         int rootVal = 3;
         double x;

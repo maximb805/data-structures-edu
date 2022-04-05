@@ -3,18 +3,18 @@ package edu.datastructures.ListBasedStackAndQueues;
 import edu.datastructures.Lists.Link;
 import edu.datastructures.Lists.LinkedListApp;
 
-public class LinkStack {
-    private LinkedListApp list;
+public class LinkStack<T> {
+    private LinkedListApp<T> list;
 
     LinkStack() {
-        list = new LinkedListApp();
+        list = new LinkedListApp<>();
     }
 
-    public void push(int intD) {
-        list.insertFirst(intD);
+    public void push(T data) {
+        list.insertFirst(data);
     }
 
-    public Link pop() {
+    public Link<T> pop() {
         return list.deleteFirst();
     }
 
@@ -30,7 +30,7 @@ public class LinkStack {
 
 class LinkStackUser {
     public static void main(String[] args) {
-        LinkStack stack = new LinkStack();
+        LinkStack<Integer> stack = new LinkStack<>();
         stack.push(15);
         stack.push(16);
         stack.push(17);
@@ -40,7 +40,7 @@ class LinkStackUser {
         stack.displayStack();
 
         while (!stack.isEmpty()) {
-            Link elem = stack.pop();
+            Link<Integer> elem = stack.pop();
             elem.displayLink();
         }
         System.out.println();

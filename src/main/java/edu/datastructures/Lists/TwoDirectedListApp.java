@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class TwoDirectedListApp {
-    private Link first;
-    private Link last;
+public class TwoDirectedListApp<T> {
+    private Link<T> first;
+    private Link<T> last;
 
     public TwoDirectedListApp() {
         first = null;
@@ -17,8 +17,8 @@ public class TwoDirectedListApp {
         return first == null;
     }
 
-    public void insertFirst(int intD) {
-        Link newLink = new Link(intD);
+    public void insertFirst(T data) {
+        Link<T> newLink = new Link<T>(data);
         if (isEmpty())
             last = newLink;
         else
@@ -27,8 +27,8 @@ public class TwoDirectedListApp {
         first = newLink;
     }
 
-    public void insertLast(int intD) {
-        Link newLink = new Link(intD);
+    public void insertLast(T data) {
+        Link<T> newLink = new Link<>(data);
         if (isEmpty())
             first = newLink;
         else {
@@ -38,15 +38,15 @@ public class TwoDirectedListApp {
         last = newLink;
     }
 
-    public void insertAfter(int key, int intData) {
-        Link newLink = new Link(intData);
+    public void insertAfter(T key, T data) {
+        Link<T> newLink = new Link<>(data);
         if (!isEmpty()) {
-            Link current;
+            Link<T> current;
             current = first;
-            while (current.getNext() != null && current.getData() != key) {
+            while (current.getNext() != null && !current.getData().equals(key)) {
                 current = current.getNext();
             }
-            if (current.getData() == key) {
+            if (current.getData().equals(key)) {
                 if (current.getNext() != null) {
                     current.getNext().setPrev(newLink);
                     newLink.setNext(current.getNext());
@@ -55,16 +55,16 @@ public class TwoDirectedListApp {
                 current.setNext(newLink);
                 newLink.setPrev(current);
             } else {
-                System.out.println(intData + "not found");
+                System.out.println(data + "not found");
             }
         } else {
             System.out.println("List's empty");
         }
     }
 
-    public Link deleteFirst() {
+    public Link<T> deleteFirst() {
         if (!isEmpty()) {
-            Link temp = first;
+            Link<T> temp = first;
             if (first.getNext() == null)
                 last = null;
             else
@@ -77,9 +77,9 @@ public class TwoDirectedListApp {
         }
     }
 
-    public Link deleteLast() {
+    public Link<T> deleteLast() {
         if (!isEmpty()) {
-            Link temp = last;
+            Link<T> temp = last;
             if (last.getPrev() == null)
                 first = null;
             else
@@ -92,14 +92,14 @@ public class TwoDirectedListApp {
         }
     }
 
-    public Link removeElement(int intData) {
+    public Link<T> removeElement(T data) {
         if (!isEmpty()) {
-            Link current = first;
-            while (current != null && current.getData() != intData) {
+            Link<T> current = first;
+            while (current != null && !current.getData().equals(data)) {
                 current = current.getNext();
             }
             if (current == null) {
-                System.out.println(intData + " not found");
+                System.out.println(data + " not found");
             } else {
                 if (current == first)
                     first = current.getNext();
@@ -120,7 +120,7 @@ public class TwoDirectedListApp {
 
     public void displayForward() {
         System.out.print("List (first --> last): ");
-        Link current = first;
+        Link<T> current = first;
         while (current != null) {
             current.displayLink();
             current = current.getNext();
@@ -130,7 +130,7 @@ public class TwoDirectedListApp {
 
     public void displayBackward() {
         System.out.print("List (last --> first): ");
-        Link current = last;
+        Link<T> current = last;
         while (current != null) {
             current.displayLink();
             current = current.getPrev();
@@ -138,14 +138,14 @@ public class TwoDirectedListApp {
         System.out.println();
     }
 
-    public Link findElement(int intData) {
+    public Link<T> findElement(T data) {
         if (!isEmpty()) {
-            Link current = first;
-            while (current != null && current.getData() != intData) {
+            Link<T> current = first;
+            while (current != null && current.getData().equals(data)) {
                 current = current.getNext();
             }
             if (current == null) {
-                System.out.println(intData + " not found");
+                System.out.println(data + " not found");
             } else {
                 return current;
             }
@@ -159,26 +159,26 @@ public class TwoDirectedListApp {
         return new ListIterator(this);
     }
 
-    public Link getFirst() {
+    public Link<T> getFirst() {
         return first;
     }
 
-    public Link getLast() {
+    public Link<T> getLast() {
         return last;
     }
 
-    public void setFirst(Link first) {
+    public void setFirst(Link<T> first) {
         this.first = first;
     }
 
-    public void setLast(Link last) {
+    public void setLast(Link<T> last) {
         this.last = last;
     }
 }
 
 class TwoDirectedListAppUser {
     public static void main(String[] args) throws IOException {
-        TwoDirectedListApp list = new TwoDirectedListApp();
+        TwoDirectedListApp<Integer> list = new TwoDirectedListApp<>();
         ListIterator iterator = list.getIterator();
         list.insertFirst(5);
         boolean breaker = true;

@@ -2,14 +2,14 @@ package edu.datastructures.Lists;
 
 import java.util.Arrays;
 
-public class SortedListApp {
-    private Link first;
+public class SortedListApp<T extends Number> {
+    private Link<T> first;
 
     public SortedListApp() {
         first = null;
     }
 
-    public SortedListApp(int[] array) {
+    public SortedListApp(T[] array) {
         first = null;
         for (int i = 0; i < array.length; i++) {
             insert(array[i]);
@@ -20,11 +20,11 @@ public class SortedListApp {
         return first == null;
     }
 
-    public void insert(int intData) {
-        Link newLink = new Link(intData);
-        Link current = first;
-        Link prev = null;
-        while (current != null && current.getData() < intData) {
+    public void insert(T data) {
+        Link<T> newLink = new Link<>(data);
+        Link<T> current = first;
+        Link<T> prev = null;
+        while (current != null && (int)current.getData() < (int)data) {
             prev = current;
             current = current.getNext();
         }
@@ -35,9 +35,9 @@ public class SortedListApp {
         newLink.setNext(current);
     }
 
-    public Link deleteFirst() {
+    public Link<T> deleteFirst() {
         if (!isEmpty()) {
-            Link temp = first;
+            Link<T> temp = first;
             first = first.getNext();
             return temp;
         } else {
@@ -46,33 +46,33 @@ public class SortedListApp {
         }
     }
 
-    public Link find(int intD) {
+    public Link<T> find(T data) {
         if (!isEmpty()) {
-            Link current = first;
-            while (current.getNext() != null && current.getData() < intD) {
+            Link<T> current = first;
+            while (current.getNext() != null && (int) current.getData() < (int) data) {
                 current = current.getNext();
             }
-            if (current.getData() == intD) {
-                System.out.println(intD + " found");
+            if (current.getData() == data) {
+                System.out.println(data + " found");
                 return current;
             }
-            System.out.println(intD + " not found");
+            System.out.println(data + " not found");
         } else {
             System.out.println("List's empty");
         }
         return null;
     }
 
-    public Link delete(int intD) {
+    public Link<T> delete(T data) {
         if (!isEmpty()) {
-            Link current = first;
-            Link prev = null;
-            while (current.getNext() != null && current.getData() < intD) {
+            Link<T> current = first;
+            Link<T> prev = null;
+            while (current.getNext() != null && (int)current.getData() < (int)data) {
                 prev = current;
                 current = current.getNext();
             }
-            if (current.getData() == intD) {
-                System.out.println(intD + " deleted");
+            if (current.getData() == data) {
+                System.out.println(data + " deleted");
                 if (prev != null) {
                     prev.setNext(current.getNext());
                 } else {
@@ -80,7 +80,7 @@ public class SortedListApp {
                 }
                 return current;
             }
-            System.out.println(intD + " not found");
+            System.out.println(data + " not found");
         } else {
             System.out.println("List's empty");
         }
@@ -88,7 +88,7 @@ public class SortedListApp {
     }
 
     public void displayList() {
-        Link current = first;
+        Link<T> current = first;
         while (current != null) {
             current.displayLink();
             current = current.getNext();
@@ -96,14 +96,14 @@ public class SortedListApp {
         System.out.println();
     }
 
-    public Link getFirst() {
+    public Link<T> getFirst() {
         return first;
     }
 }
 
 class SortedListAppUser {
     public static void main(String[] args) {
-        SortedListApp list = new SortedListApp();
+        SortedListApp<Integer> list = new SortedListApp<>();
         list.insert(20);
         list.insert(29);
         list.insert(15);
@@ -127,14 +127,14 @@ class SortedListAppUser {
         list.delete(20);
         list.displayList();
 
-        int[] array = new int[100];
+        Integer[] array = new Integer[100];
         for (int i = 0; i < array.length; i++) {
             array[i] = (int) (Math.random() * 100);
         }
         System.out.println(Arrays.toString(array));
         System.out.println();
 
-        SortedListApp sortingApp = new SortedListApp(array);
+        SortedListApp<Integer> sortingApp = new SortedListApp<>(array);
         for (int i = 0; i < array.length; i++) {
             array[i] = sortingApp.deleteFirst().getData();
         }

@@ -1,41 +1,39 @@
 package edu.datastructures.Lists;
 
-public class Link {
-    private int intData;
-    private Link next;
-    private Link prev;
-    private Link upper;
-    private Link lower;
+public class Link<T> {
+    private T data;
+    private Link<T> next;
+    private Link<T> prev;
 
-    Link(int intData) {
-        this.intData = intData;
+    Link(T data) {
+        this.data = data;
     }
 
     public void displayLink() {
-        System.out.print("{" + intData + "} ");
+        System.out.print(data + " ");
     }
 
-    public Link getNext() {
+    public Link<T> getNext() {
         return next;
     }
 
-    public void setNext(Link next) {
+    public void setNext(Link<T> next) {
         this.next = next;
     }
 
-    public int getData() {
-        return intData;
+    public T getData() {
+        return data;
     }
 
-    public void setData(int intData) {
-        this.intData = intData;
+    public void setData(T data) {
+        this.data = data;
     }
 
-    public Link getPrev() {
+    public Link<T> getPrev() {
         return prev;
     }
 
-    public void setPrev(Link prev) {
+    public void setPrev(Link<T> prev) {
         this.prev = prev;
     }
 }
