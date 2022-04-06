@@ -154,11 +154,11 @@ public class ArraySortingApp {
 class ArraySortingAppUser {
     public static void main(String[] args) {
         ArraySortingApp array1 = new ArraySortingApp(30);
-        ArraySortingApp array2 = new ArraySortingApp(30);
+        ArraySortingApp array2 = new ArraySortingApp(1000);
         ArraySortingApp array3 = new ArraySortingApp(30);
         ArraySortingApp array4 = new ArraySortingApp(1000);
         array1.fillWithRandoms(30);
-        array2.fillWithRandoms(30);
+        array2.fillWithRandoms(1000);
         array3.fillWithRandoms(30);
         array4.fillWithRandoms(1000);
         array1.show("Array1");
@@ -182,6 +182,5 @@ class ArraySortingAppUser {
 
         array4.noDubs();
         array4.show("Array4 sorted no dubs");
-
     }
 }
