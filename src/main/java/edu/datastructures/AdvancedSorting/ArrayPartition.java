@@ -5,15 +5,22 @@ public class ArrayPartition {
 
     ArrayPartition(int size) {
         array = new int[size];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (int) (Math.random() * 100);
+        }
     }
 
-    public int partitionIt(int left, int right, int borderVal) {
-        int leftB = left;
-        int rightB = right - 1;
+    public int partitionIt(int borderValIndex) {
+        int left = 0;
+        int right = array.length - 1;
+        int leftB = left - 1;
+        int rightB = right + 1;
+        int pivot = array[borderValIndex];
+        System.out.println("Pivot is: " + array[borderValIndex]);
         while (true) {
-            while (array[++leftB] < borderVal)
+            while (leftB < right && array[++leftB] < pivot)
                 ;
-            while (array[--rightB] > borderVal)
+            while (rightB > left && array[--rightB] > pivot)
                 ;
             if (rightB <= leftB)
                 break;
@@ -21,84 +28,84 @@ public class ArrayPartition {
                 swap(leftB, rightB);
             }
         }
-        swap(leftB, right - 1);
+        System.out.println("Array partition at index: " + leftB);
         return leftB;
     }
 
-    public void quickSort() {
-        qSort(0, array.length - 1);
+    public int getMedian() {
+        return median(array.length - 1, 0, array.length - 1);
     }
 
-    private void qSort(int left, int right) {
-//        if (right - left + 1 <= 3)
-//            manualSort(left, right);
-        if (right - left + 1 < 10)
-            insertionSort(left, right);
-        else {
-            int med = medianOf3(left, right);
-            int partition = partitionIt(left, right, med);
-            qSort(left, partition - 1);
-            qSort(partition + 1, right);
+    private int median(int index, int left, int right) {
+        index = partitionIt(index);
+        if (index == array.length / 2) {
+            System.out.println("Median is: " + array[index]);
+            return array[index];
         }
-    }
-
-    private int medianOf3(int left, int right) {
-        int med = (left + right) / 2;
-        if (array[left] > array[med]) {
-            swap(left, med);
-        }
-        if (array[left] > array[right]) {
-            swap(left, right);
-        }
-        if (array[med] > array[right]) {
-            swap(med, right);
-        }
-        swap(med, right - 1);
-        return array[right - 1];
-    }
-
-    private void insertionSort(int left, int right) {
-        for (int i = left + 1; i <= right; i++) {
-            int buffer = array[i];
-            int j = i;
-            while (j > left && array[j - 1] >= buffer) {
-                array[j] = array[j - 1];
-                j--;
+        if (right - left <= 2) {
+            int result = manualChoose(left, right, array.length / 2);
+            System.out.println("Median is: " + array[index]);
+            return result;
+        } else {
+            if (index < array.length / 2) {
+                left = left >= index ? left + 1 : index;
+            } else {
+                right = right <= index ? right - 2 : index - 1;
             }
-            array[j] = buffer;
+            index = (int) ((Math.random() * (right - left - 1)) + left + 1);
+            return median(index, left, right);
         }
     }
 
-    private void manualSort(int left, int right) {
-        int size = right - left + 1;
-        if (size <= 1)
-            return;
-        if (size == 2) {
+    //returns (elementNumber)th largest element
+    public int getLargestOf(int elemNumber) {
+        return getElem(array.length - 1, 0, array.length - 1, elemNumber);
+    }
+
+    private int getElem(int index, int left, int right, int elemNumber) {
+        index = partitionIt(index);
+        if (index == elemNumber - 1) {
+            System.out.println(elemNumber + "'s element: " + array[index]);
+            return array[index];
+        }
+        if (right - left <= 2) {
+            int result = manualChoose(left, right, elemNumber - 1);
+            System.out.println(elemNumber + "'s element: " + result);
+            return result;
+        } else {
+            if (index < elemNumber) {
+                left = left >= index ? left + 1 : index;
+            } else {
+                right = right <= index ? right - 2 : index - 1;
+            }
+            index = (int) ((Math.random() * (right - left)) + left);
+            return getElem(index, left, right, elemNumber);
+        }
+    }
+
+    private int manualChoose(int left, int right, int index) {
+        if (left - right == 0) {
+            return array[left];
+        }
+        if (left - right == 1) {
             if (array[left] > array[right])
                 swap(left, right);
         } else {
-            if (array[left] > array[right - 1]) {
-                swap(left, right - 1);
-            }
-            if (array[left] > array[right]) {
+            if (array[left] > array[left + 1])
+                swap(left, left + 1);
+            if (array[left] > array[right])
                 swap(left, right);
-            }
-            if (array[left + 1] > array[right]) {
+            if (array[left + 1] > array[right])
                 swap(left + 1, right);
-            }
         }
+        return array[index];
     }
 
     private void swap(int a, int b) {
         int temp = array[a];
         array[a] = array[b];
         array[b] = temp;
-    }
-
-    public void fillWithRandoms() {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (int) (Math.random() * 100);
-        }
+        ;
     }
 
     public void display() {
@@ -108,6 +115,7 @@ public class ArrayPartition {
                 System.out.print(array[i]);
             else
                 System.out.print(array[i] + ", ");
+
         }
         System.out.println("]");
     }
@@ -115,13 +123,13 @@ public class ArrayPartition {
 
 class ArrayPartitionUser {
     public static void main(String[] args) {
-        ArrayPartition array = new ArrayPartition(100);
-        array.fillWithRandoms();
-        array.display();
-        System.out.println();
-        array.quickSort();
-        array.display();
-        array.fillWithRandoms();
-        array.display();
+        ArrayPartition partArray = new ArrayPartition(100);
+        partArray.display();
+
+        partArray.getLargestOf(9);
+        partArray.display();
+
+        partArray.getMedian();
+        partArray.display();
     }
 }
