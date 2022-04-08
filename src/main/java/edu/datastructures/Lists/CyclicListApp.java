@@ -43,7 +43,7 @@ public class CyclicListApp<T>
         if (!isEmpty()) {
             if (current.getNext().getData().equals(data))
                 return deleteNext();
-            Link marker = current;
+            Link<T> marker = current;
             current = current.getNext();
             while (current != marker) {
                 if (current.getNext().getData().equals(data))
@@ -61,7 +61,7 @@ public class CyclicListApp<T>
         if (!isEmpty()) {
             if (current.getData().equals(data))
                 return current;
-            Link marker = current;
+            Link<T> marker = current;
             current = current.getNext();
             while (current != marker) {
                 if (current.getData().equals(data))

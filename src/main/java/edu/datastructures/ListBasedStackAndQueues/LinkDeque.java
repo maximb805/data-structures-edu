@@ -3,29 +3,29 @@ package edu.datastructures.ListBasedStackAndQueues;
 import edu.datastructures.Lists.Link;
 import edu.datastructures.Lists.TwoDirectedListApp;
 
-public class LinkDeque {
-    TwoDirectedListApp list;
+public class LinkDeque<T> {
+    TwoDirectedListApp<T> list;
 
     public LinkDeque() {
-        list = new TwoDirectedListApp();
+        list = new TwoDirectedListApp<>();
     }
 
-    public void insertLeft(int num) {
-        list.insertFirst(num);
+    public void insertLeft(T data) {
+        list.insertFirst(data);
     }
 
-    public void insertRight(int num) {
-        list.insertLast(num);
+    public void insertRight(T data) {
+        list.insertLast(data);
     }
 
-    public Link removeLeft() {
+    public Link<T> removeLeft() {
         if (!isEmpty()) {
             return list.deleteFirst();
         }
         return null;
     }
 
-    public Link removeRight() {
+    public Link<T> removeRight() {
         if (!isEmpty()) {
             return list.deleteLast();
         }
@@ -43,7 +43,7 @@ public class LinkDeque {
 
 class LinkDequeUser {
     public static void main(String[] args) {
-        LinkDeque deque = new LinkDeque();
+        LinkDeque<Integer> deque = new LinkDeque<>();
         int i = 0;
         deque.show();
         while (i < 10) {

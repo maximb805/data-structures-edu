@@ -1,4 +1,4 @@
-package edu.datastructures.Recursion;
+package edu.datastructures.Arrays.Recursion;
 
 import edu.datastructures.ArrayBasedStackAndQueues.ArrayStackApp;
 import edu.datastructures.ArrayBasedStackAndQueues.StackException;

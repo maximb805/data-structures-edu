@@ -155,8 +155,8 @@ public class TwoDirectedListApp<T> {
         return null;
     }
 
-    public ListIterator getIterator() {
-        return new ListIterator(this);
+    public ListIterator<T> getIterator() {
+        return new ListIterator<>(this);
     }
 
     public Link<T> getFirst() {
@@ -179,7 +179,7 @@ public class TwoDirectedListApp<T> {
 class TwoDirectedListAppUser {
     public static void main(String[] args) throws IOException {
         TwoDirectedListApp<Integer> list = new TwoDirectedListApp<>();
-        ListIterator iterator = list.getIterator();
+        ListIterator<Integer> iterator = list.getIterator();
         list.insertFirst(5);
         boolean breaker = true;
 

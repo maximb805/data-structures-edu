@@ -1,4 +1,4 @@
-package edu.datastructures.Recursion;
+package edu.datastructures.Arrays.Recursion;
 
 public class MergeSortingApp {
     private int[] array;

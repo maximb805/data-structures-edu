@@ -1,20 +1,20 @@
 package edu.datastructures.ListBasedStackAndQueues;
 
-import edu.datastructures.Lists.Link;
+import edu.datastructures.Lists.ComparableLink;
 import edu.datastructures.Lists.SortedListApp;
 
-public class LinkPriorityQueue {
-    SortedListApp list;
+public class LinkPriorityQueue<T extends Comparable<T>> {
+    SortedListApp<T> list;
 
     LinkPriorityQueue() {
-        list = new SortedListApp();
+        list = new SortedListApp<>();
     }
 
-    public void insert(int num) {
-        list.insert(num);
+    public void insert(T data) {
+        list.insert(data);
     }
 
-    public Link remove() {
+    public ComparableLink<T> remove() {
         if (!isEmpty()) {
             return list.deleteFirst();
         }
@@ -33,7 +33,7 @@ public class LinkPriorityQueue {
 
 class LinkPriorityQueueUser {
     public static void main(String[] args) {
-        LinkPriorityQueue queue = new LinkPriorityQueue();
+        LinkPriorityQueue<Integer> queue = new LinkPriorityQueue<>();
 
         queue.insert(50);
         queue.insert(60);

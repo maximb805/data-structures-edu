@@ -12,11 +12,11 @@ class MyException extends Exception {
 
 public class JosephusFlaviusProblem
 {
-    private CyclicListApp list;
+    private CyclicListApp<Integer> list;
     private int step, manCount;
 
     JosephusFlaviusProblem(int manCount, int startNum, int step) {
-        list = new CyclicListApp();
+        list = new CyclicListApp<>();
         this.step = step - 1;
         this.manCount = manCount;
         for (int i = 1; i <= manCount; i++) {

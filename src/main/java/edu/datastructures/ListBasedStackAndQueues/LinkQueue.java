@@ -3,18 +3,18 @@ package edu.datastructures.ListBasedStackAndQueues;
 import edu.datastructures.Lists.Link;
 import edu.datastructures.Lists.TwoSidedLinkedListApp;
 
-public class LinkQueue {
-    private TwoSidedLinkedListApp list;
+public class LinkQueue<T> {
+    private TwoSidedLinkedListApp<T> list;
 
-    LinkQueue() {
-        list = new TwoSidedLinkedListApp();
+    public LinkQueue() {
+        list = new TwoSidedLinkedListApp<>();
     }
 
-    public void insert(int intD) {
-        list.insertLast(intD);
+    public void insert(T data) {
+        list.insertLast(data);
     }
 
-    public Link remove() {
+    public Link<T> remove() {
         return list.deleteFirst();
     }
 
@@ -31,7 +31,7 @@ public class LinkQueue {
 class LinkQueueUser {
     public static void main(String[] args) {
 
-        LinkQueue queue = new LinkQueue();
+        LinkQueue<Integer> queue = new LinkQueue<>();
         queue.insert(15);
         queue.insert(16);
         queue.insert(17);
@@ -41,7 +41,7 @@ class LinkQueueUser {
         queue.displayQueue();
 
         while (!queue.isEmpty()) {
-            Link elem = queue.remove();
+            Link<Integer> elem = queue.remove();
             elem.displayLink();
         }
         System.out.println();

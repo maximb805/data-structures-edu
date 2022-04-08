@@ -3,20 +3,20 @@ package edu.datastructures.ListBasedStackAndQueues;
 import edu.datastructures.Lists.CyclicListApp;
 import edu.datastructures.Lists.Link;
 
-public class CyclicListQueue
+public class CyclicListQueue<T>
 {
-    private CyclicListApp list;
+    private CyclicListApp<T> list;
 
     CyclicListQueue() {
-        list = new CyclicListApp();
+        list = new CyclicListApp<>();
     }
 
-    public void insert(int intD) {
-        list.insert(intD);
+    public void insert(T data) {
+        list.insert(data);
         list.step();
     }
 
-    public Link remove() {
+    public Link<T> remove() {
         return list.deleteNext();
     }
 
@@ -33,7 +33,7 @@ public class CyclicListQueue
 class CyclicListQueueUser {
     public static void main(String[] args) {
 
-        CyclicListQueue queue = new CyclicListQueue();
+        CyclicListQueue<Integer> queue = new CyclicListQueue<>();
         queue.insert(15);
         queue.insert(16);
         queue.insert(17);
@@ -43,7 +43,7 @@ class CyclicListQueueUser {
         queue.displayQueue();
 
         while (!queue.isEmpty()) {
-            Link elem = queue.remove();
+            Link<Integer> elem = queue.remove();
             elem.displayLink();
         }
         System.out.println();

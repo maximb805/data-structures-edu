@@ -1,8 +1,8 @@
 package edu.datastructures.Lists;
 
-public class TwoSidedLinkedListApp {
-    private Link first;
-    private Link last;
+public class TwoSidedLinkedListApp<T> {
+    private Link<T> first;
+    private Link<T> last;
 
     public TwoSidedLinkedListApp() {
         first = null;
@@ -13,16 +13,16 @@ public class TwoSidedLinkedListApp {
         return first == null;
     }
 
-    public void insertFirst(int intD) {
-        Link newLink = new Link(intD);
+    public void insertFirst(T data) {
+        Link<T> newLink = new Link<>(data);
         if (isEmpty())
             last = newLink;
         newLink.setNext(first);
         first = newLink;
     }
 
-    public void insertLast(int intD) {
-        Link newLink = new Link(intD);
+    public void insertLast(T data) {
+        Link<T> newLink = new Link<>(data);
         if (isEmpty())
             first = newLink;
         else
@@ -31,7 +31,7 @@ public class TwoSidedLinkedListApp {
     }
 
     public void displayList() {
-        Link current = first;
+        Link<T> current = first;
         while (current != null) {
             current.displayLink();
             current = current.getNext();
@@ -39,9 +39,9 @@ public class TwoSidedLinkedListApp {
         System.out.println();
     }
 
-    public Link deleteFirst() {
+    public Link<T> deleteFirst() {
         if (!isEmpty()) {
-            Link temp = first;
+            Link<T> temp = first;
             if (first.getNext() == null)
                 last = null;
             first = first.getNext();
@@ -52,18 +52,18 @@ public class TwoSidedLinkedListApp {
         }
     }
 
-    public Link getFirst() {
+    public Link<T> getFirst() {
         return first;
     }
 
-    public Link getLast() {
+    public Link<T> getLast() {
         return last;
     }
 }
 
 class TwoSidedLinkedListAppUser {
     public static void main(String[] args) {
-        TwoSidedLinkedListApp list = new TwoSidedLinkedListApp();
+        TwoSidedLinkedListApp<Integer> list = new TwoSidedLinkedListApp<>();
         list.insertFirst(17);
         list.insertFirst(16);
         list.insertFirst(15);

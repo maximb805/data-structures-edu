@@ -1,4 +1,4 @@
-package edu.datastructures.Recursion;
+package edu.datastructures.Arrays.Recursion;
 
 public class Towers {
     private static int counter = 0;

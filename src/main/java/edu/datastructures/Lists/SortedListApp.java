@@ -2,8 +2,8 @@ package edu.datastructures.Lists;
 
 import java.util.Arrays;
 
-public class SortedListApp<T extends Number> {
-    private Link<T> first;
+public class SortedListApp<T extends Comparable<T>> {
+    private ComparableLink<T> first;
 
     public SortedListApp() {
         first = null;
@@ -21,10 +21,10 @@ public class SortedListApp<T extends Number> {
     }
 
     public void insert(T data) {
-        Link<T> newLink = new Link<>(data);
-        Link<T> current = first;
-        Link<T> prev = null;
-        while (current != null && (int)current.getData() < (int)data) {
+        ComparableLink<T> newLink = new ComparableLink<>(data);
+        ComparableLink<T> current = first;
+        ComparableLink<T> prev = null;
+        while (current != null && current.getData().compareTo(data) < 0) {
             prev = current;
             current = current.getNext();
         }
@@ -35,9 +35,9 @@ public class SortedListApp<T extends Number> {
         newLink.setNext(current);
     }
 
-    public Link<T> deleteFirst() {
+    public ComparableLink<T> deleteFirst() {
         if (!isEmpty()) {
-            Link<T> temp = first;
+            ComparableLink<T> temp = first;
             first = first.getNext();
             return temp;
         } else {
@@ -46,13 +46,13 @@ public class SortedListApp<T extends Number> {
         }
     }
 
-    public Link<T> find(T data) {
+    public ComparableLink<T> find(T data) {
         if (!isEmpty()) {
-            Link<T> current = first;
-            while (current.getNext() != null && (int) current.getData() < (int) data) {
+            ComparableLink<T> current = first;
+            while (current.getNext() != null && current.getData().compareTo(data) < 0) {
                 current = current.getNext();
             }
-            if (current.getData() == data) {
+            if (current.getData().compareTo(data) == 0) {
                 System.out.println(data + " found");
                 return current;
             }
@@ -63,15 +63,15 @@ public class SortedListApp<T extends Number> {
         return null;
     }
 
-    public Link<T> delete(T data) {
+    public ComparableLink<T> delete(T data) {
         if (!isEmpty()) {
-            Link<T> current = first;
-            Link<T> prev = null;
-            while (current.getNext() != null && (int)current.getData() < (int)data) {
+            ComparableLink<T> current = first;
+            ComparableLink<T> prev = null;
+            while (current.getNext() != null && current.getData().compareTo(data) < 0) {
                 prev = current;
                 current = current.getNext();
             }
-            if (current.getData() == data) {
+            if (current.getData().compareTo(data) == 0) {
                 System.out.println(data + " deleted");
                 if (prev != null) {
                     prev.setNext(current.getNext());
@@ -88,7 +88,7 @@ public class SortedListApp<T extends Number> {
     }
 
     public void displayList() {
-        Link<T> current = first;
+        ComparableLink<T> current = first;
         while (current != null) {
             current.displayLink();
             current = current.getNext();
@@ -96,7 +96,7 @@ public class SortedListApp<T extends Number> {
         System.out.println();
     }
 
-    public Link<T> getFirst() {
+    public ComparableLink<T> getFirst() {
         return first;
     }
 }
