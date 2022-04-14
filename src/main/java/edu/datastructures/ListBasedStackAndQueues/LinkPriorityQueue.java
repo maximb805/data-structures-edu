@@ -4,9 +4,9 @@ import edu.datastructures.Lists.ComparableLink;
 import edu.datastructures.Lists.SortedListApp;
 
 public class LinkPriorityQueue<T extends Comparable<T>> {
-    SortedListApp<T> list;
+    private SortedListApp<T> list;
 
-    LinkPriorityQueue() {
+    public LinkPriorityQueue() {
         list = new SortedListApp<>();
     }
 

@@ -2,8 +2,7 @@ package edu.datastructures.Trees;
 
 import java.time.LocalDate;
 
-public class Person
-{
+public class Person {
     private String firstName;
     private String surname;
     private LocalDate dateOfBirth;

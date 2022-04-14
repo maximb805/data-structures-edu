@@ -9,42 +9,81 @@ public class BinarySearchTreeApp<T extends Comparable<T>, R> {
         root = null;
     }
 
-    public void insert(T id, R data) {
-        Node<T, R> newNode = new Node<>(id, data);
+    public void insert(T key, R data) {
+        Node<T, R> newNode = new Node<>(key, data);
         if (root == null)
             root = newNode;
         else {
             Node<T, R> current = root;
             while (true) {
-                if (id.compareTo(current.getKey()) >= 0) {
+                if (key.compareTo(current.getKey()) >= 0) {
                     if (current.getRight() != null)
                         current = current.getRight();
-                    else
+                    else {
+                        current.setRight(newNode);
                         break;
+                    }
                 } else {
                     if (current.getLeft() != null)
                         current = current.getLeft();
-                    else
+                    else {
+                        current.setLeft(newNode);
                         break;
+                    }
                 }
             }
-            if (id.compareTo(current.getKey()) >= 0)
-                current.setRight(newNode);
-            else
-                current.setLeft(newNode);
         }
     }
 
-    public Node<T, R> find(T id) {
+    public void insertRight(Node<T, R> parent, Node<T, R> child) {
+        if (root != null) {
+            parent.setRight(child);
+        } else
+            System.out.println("Tree is empty");
+    }
+
+    public void insertLeft(Node<T, R> parent, Node<T, R> child) {
+        if (root != null) {
+            parent.setLeft(child);
+        } else
+            System.out.println("Tree is empty");
+    }
+
+    public void insert(Node<T, R> newNode) {
+        if (root == null)
+            root = newNode;
+        else {
+            Node<T, R> current = root;
+            while (true) {
+                if (newNode.getKey().compareTo(current.getKey()) >= 0) {
+                    if (current.getRight() != null)
+                        current = current.getRight();
+                    else {
+                        current.setRight(newNode);
+                        break;
+                    }
+                } else {
+                    if (current.getLeft() != null)
+                        current = current.getLeft();
+                    else {
+                        current.setLeft(newNode);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public Node<T, R> find(T key) {
         if (!isEmpty()) {
             Node<T, R> current = root;
-            while (id.compareTo(current.getKey()) != 0) {
-                if (id.compareTo(current.getKey()) > 0)
+            while (key.compareTo(current.getKey()) != 0) {
+                if (key.compareTo(current.getKey()) > 0)
                     current = current.getRight();
                 else
                     current = current.getLeft();
-                if(current == null) {
-                    System.out.println("Element with key " + id + " not found");
+                if (current == null) {
+                    System.out.println("Element with key " + key + " not found");
                     return null;
                 }
             }
@@ -55,83 +94,92 @@ public class BinarySearchTreeApp<T extends Comparable<T>, R> {
         }
     }
 
-    private Node<T, R> getPrev(Node<T, R> current) throws TreeException{
+    public Node<T, R> getParent(Node<T, R> current) {
         if (current != root && current != null) {
             Node<T, R> prev = root;
-            while (prev.getRight().getKey().compareTo(current.getKey()) != 0 &&
-                    prev.getLeft().getKey().compareTo(current.getKey()) != 0) {
+            while (prev.getRight() != current && prev.getLeft() != current) {
                 if (current.getKey().compareTo(prev.getKey()) > 0)
                     prev = prev.getRight();
                 else
                     prev = prev.getLeft();
-                }
+            }
             return prev;
         } else {
-            throw new TreeException("Current node is root or null");
+            System.out.println("Current node is root or null");
+            return null;
         }
     }
 
-    public Node<T, R> delete(T id) throws TreeException{
-        Node<T, R> delNode = find(id);
+    public Node<T, R> delete(T key) {
+        Node<T, R> parent = root;
+        Node<T, R> delNode = root;
+        while (delNode != null && key.compareTo(delNode.getKey()) != 0) {
+            if (key.compareTo(delNode.getKey()) < 0) {
+                parent = delNode;
+                delNode = delNode.getLeft();
+            } else {
+                parent = delNode;
+                delNode = delNode.getRight();
+            }
+        }
         if (delNode != null) {
-            try {
-                if (delNode.getLeft() == null && delNode.getRight() == null) {
-                    if (delNode == root) {
-                        root = null;
+            if (delNode.getLeft() == null && delNode.getRight() == null) {
+                if (delNode == root) {
+                    root = null;
+                } else {
+                    if (delNode == parent.getLeft()) {
+                        parent.setLeft(null);
                     } else {
-                        if (delNode == getPrev(delNode).getLeft()) {
-                            getPrev(delNode).setLeft(null);
-                        } else {
-                            getPrev(delNode).setRight(null);
-                        }
+                        parent.setRight(null);
+                    }
+                }
+            } else {
+                if (delNode.getLeft() == null) {
+                    if (delNode == root) {
+                        root = delNode.getRight();
+                    } else {
+                        parent.setRight(delNode.getRight());
                     }
                 } else {
-                    if (delNode.getLeft() == null) {
+                    if (delNode.getRight() == null) {
                         if (delNode == root) {
-                            root = delNode.getRight();
+                            root = delNode.getLeft();
                         } else {
-                            getPrev(delNode).setRight(delNode.getRight());
+                            parent.setLeft(delNode.getLeft());
                         }
                     } else {
-                        if (delNode.getRight() == null) {
-                            if (delNode == root) {
-                                root = delNode.getLeft();
-                            } else {
-                                getPrev(delNode).setLeft(delNode.getLeft());
-                            }
+                        Node<T, R> replacer = delNode.getRight();
+                        Node<T, R> replacerParent = delNode;
+                        while (replacer.getLeft() != null) {
+                            replacerParent = replacer;
+                            replacer = replacer.getLeft();
+                        }
+                        if (replacer != delNode.getRight()) {
+                            replacerParent.setLeft(replacer.getRight());
+                            replacer.setRight(delNode.getRight());
+                        }
+                        replacer.setLeft(delNode.getLeft());
+                        if (delNode == root) {
+                            root = replacer;
                         } else {
-                            Node<T, R> replacer = delNode.getRight();
-                            while (replacer.getLeft() != null) {
-                                replacer = replacer.getLeft();
-                            }
-                            if (replacer != getPrev(replacer).getRight()) {
-                                getPrev(replacer).setLeft(replacer.getRight());
-                                replacer.setRight(delNode.getRight());
-                            }
-                            replacer.setLeft(delNode.getLeft());
-                            if (delNode == root) {
-                                root = replacer;
+                            if (delNode == parent.getLeft()) {
+                                parent.setLeft(replacer);
                             } else {
-                                if (delNode == getPrev(delNode).getLeft()) {
-                                    getPrev(delNode).setLeft(replacer);
-                                } else {
-                                    getPrev(delNode).setRight(replacer);
-                                }
+                                parent.setRight(replacer);
                             }
                         }
                     }
                 }
-                return delNode;
-            } catch (TreeException ex) {
-                throw new TreeException(ex.getMessage());
             }
+            return delNode;
         } else {
+            System.out.println("Element with key " + key + " not found");
             return null;
         }
     }
 
     public Node<T, R> maximum() {
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             Node<T, R> current = root;
             while (current.getRight() != null) {
                 current = current.getRight();
@@ -144,7 +192,7 @@ public class BinarySearchTreeApp<T extends Comparable<T>, R> {
     }
 
     public Node<T, R> minimum() {
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             Node<T, R> current = root;
             while (current.getLeft() != null) {
                 current = current.getLeft();
@@ -156,17 +204,43 @@ public class BinarySearchTreeApp<T extends Comparable<T>, R> {
         }
     }
 
-    public void traversal() {
+    public void traverseInOrd() {
         inOrder(root);
     }
 
+    public void traversePreOrd() {
+        preOrder(root);
+    }
+
+    public void traversePostOrd() {
+        postOrder(root);
+    }
+
     private void inOrder(Node<T, R> localRoot) {
-        if(localRoot == null) {
+        if (localRoot == null) {
             return;
         }
         inOrder(localRoot.getLeft());
         localRoot.displayNode();
         inOrder(localRoot.getRight());
+    }
+
+    private void preOrder(Node<T, R> localRoot) {
+        if (localRoot == null) {
+            return;
+        }
+        localRoot.displayNode();
+        preOrder(localRoot.getLeft());
+        preOrder(localRoot.getRight());
+    }
+
+    private void postOrder(Node<T, R> localRoot) {
+        if (localRoot == null) {
+            return;
+        }
+        postOrder(localRoot.getLeft());
+        postOrder(localRoot.getRight());
+        localRoot.displayNode();
     }
 
     public boolean isEmpty() {
@@ -175,6 +249,13 @@ public class BinarySearchTreeApp<T extends Comparable<T>, R> {
 
     public Node<T, R> getRoot() {
         return root;
+    }
+
+    @Override
+    public String toString() {
+        return "BinarySearchTreeApp{" +
+                "root=" + root +
+                '}';
     }
 }
 
@@ -192,19 +273,22 @@ class BinarySearchTreeAppUser {
         tree.insert(93, addPerson("Peter", "Parker", LocalDate.of(1975, 6, 27)));
         tree.insert(6, addPerson("Michael", "Jackson", LocalDate.of(1958, 8, 29)));
         tree.insert(19, addPerson("Benson", "Payne", LocalDate.of(1979, 6, 17)));
-        tree.traversal();
+        System.out.println("In order: ");
+        tree.traverseInOrd();
+        System.out.println("\nPre order: ");
+        tree.traversePreOrd();
+        System.out.println("\nPost order: ");
+        tree.traversePostOrd();
         System.out.println();
+        System.out.println("Max key value: ");
         tree.maximum().displayNode();
+        System.out.println("Min key value: ");
         tree.minimum().displayNode();
         System.out.println();
-        try {
-            tree.delete(82);
-            tree.traversal();
-            System.out.println();
-        } catch (TreeException ex) {
-            System.out.println(ex.getMessage());
-        }
-
+        tree.delete(87);
+        tree.traverseInOrd();
+        System.out.println("\nParent of element with key 63: ");
+        tree.getParent(tree.find(63)).displayNode();
     }
 
     public static Person addPerson(String firstName, String surname, LocalDate dateOfBirth) {

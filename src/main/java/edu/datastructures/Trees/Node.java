@@ -7,7 +7,7 @@ public class Node<T extends Comparable<T>, R> implements Comparable<T> {
     private Node<T, R> left;
     private Node<T, R> right;
 
-    Node(T key, R data) {
+    public Node(T key, R data) {
         this.key = key;
         this.data = data;
     }
@@ -47,13 +47,21 @@ public class Node<T extends Comparable<T>, R> implements Comparable<T> {
 
     private int compare(T thisKey, T anotherKey) {
         if (thisKey instanceof Number && anotherKey instanceof Number) {
-            if(((Number) thisKey).doubleValue() == ((Number) anotherKey).doubleValue())
+            if (((Number) thisKey).doubleValue() == ((Number) anotherKey).doubleValue())
                 return 0;
             else
                 return ((Number) thisKey).doubleValue() < ((Number) anotherKey).doubleValue() ? -1 : 1;
         } else {
             return thisKey.compareTo(anotherKey);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "key=" + key +
+                ", data=" + data +
+                '}';
     }
 }
 

@@ -92,6 +92,29 @@ public class TwoDirectedListApp<T> {
         }
     }
 
+    public Link<T> removeCurrent(Link<T> current) {
+        if (!isEmpty()) {
+            if (current == first && current == last)
+                first = last = null;
+            if (current != first)
+                current.getPrev().setNext(current.getNext());
+            else {
+                first = current.getNext();
+                current.getNext().setPrev(null);
+            }
+            if (current != last)
+                current.getNext().setPrev(current.getPrev());
+            else {
+                last = current.getPrev();
+                current.getPrev().setNext(null);
+            }
+            return current;
+        } else {
+            System.out.println("List's empty");
+            return null;
+        }
+    }
+
     public Link<T> removeElement(T data) {
         if (!isEmpty()) {
             Link<T> current = first;

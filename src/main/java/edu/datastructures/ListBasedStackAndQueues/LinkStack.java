@@ -6,7 +6,7 @@ import edu.datastructures.Lists.LinkedListApp;
 public class LinkStack<T> {
     private LinkedListApp<T> list;
 
-    LinkStack() {
+    public LinkStack() {
         list = new LinkedListApp<>();
     }
 
