@@ -1,4 +1,4 @@
-package edu.datastructures.Trees;
+package edu.datastructures.Trees.BinTrees;
 
 
 public class Node<T extends Comparable<T>, R> implements Comparable<T> {

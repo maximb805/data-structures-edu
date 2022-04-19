@@ -1,7 +1,7 @@
 package edu.datastructures.Trees.HuffmanCode;
 
-import edu.datastructures.Trees.BinarySearchTreeApp;
-import edu.datastructures.Trees.Node;
+import edu.datastructures.Trees.BinTrees.BinarySearchTreeApp;
+import edu.datastructures.Trees.BinTrees.Node;
 
 public class HuffmanCode {
     public static PriorityQueue<Integer, BinarySearchTreeApp<Integer, Character>> queue = new PriorityQueue<>();

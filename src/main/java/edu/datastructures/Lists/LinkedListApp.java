@@ -113,6 +113,14 @@ public class LinkedListApp<T> {
     public Link<T> getFirst() {
         return first;
     }
+
+    public void forEach(ForEachIFace<T> obj) {
+        Link<T> current = first;
+        while (current != null) {
+            current.setData(obj.func(current.getData()));
+            current = current.getNext();
+        }
+    }
 }
 
 class LinkedListAppUSer {

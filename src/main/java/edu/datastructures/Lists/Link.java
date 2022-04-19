@@ -5,12 +5,12 @@ public class Link<T> {
     private Link<T> next;
     private Link<T> prev;
 
-    Link(T data) {
+    public Link(T data) {
         this.data = data;
     }
 
     public void displayLink() {
-        System.out.println(data + " ");
+        System.out.print(data + " ");
     }
 
     public Link<T> getNext() {

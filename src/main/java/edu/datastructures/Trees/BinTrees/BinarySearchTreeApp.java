@@ -1,4 +1,4 @@
-package edu.datastructures.Trees;
+package edu.datastructures.Trees.BinTrees;
 
 import java.time.LocalDate;
 

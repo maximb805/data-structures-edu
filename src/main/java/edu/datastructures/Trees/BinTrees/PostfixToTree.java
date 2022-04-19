@@ -1,4 +1,4 @@
-package edu.datastructures.Trees;
+package edu.datastructures.Trees.BinTrees;
 
 import edu.datastructures.Lists.Link;
 import edu.datastructures.Lists.TwoDirectedListApp;
