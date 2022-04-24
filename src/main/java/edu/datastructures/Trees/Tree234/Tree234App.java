@@ -1,6 +1,8 @@
 package edu.datastructures.Trees.Tree234;
 
 
+import edu.datastructures.Trees.BinTrees.Node;
+
 import java.util.Arrays;
 
 public class Tree234App<T extends Comparable<T>, R> {
@@ -54,7 +56,7 @@ public class Tree234App<T extends Comparable<T>, R> {
         }
     }
 
-    public void split(Node234<T, R> currentNode) {
+    private void split(Node234<T, R> currentNode) {
         if (currentNode.getParent() == null) {
             Node234<T, R> parent = new Node234<>();
             root = parent;
@@ -130,6 +132,44 @@ public class Tree234App<T extends Comparable<T>, R> {
         return root == null;
     }
 
+    public void traverse() {
+        inOrder(root);
+    }
+
+    private void inOrder(Node234<T, R> node) {
+        if (node == null)
+            return;
+        else {
+            inOrder(node.getNode0());
+        }
+        if (node.getItem0() != null) {
+            System.out.print(node.getItem0().getKey() + " ");
+            inOrder(node.getNode1());
+            if (node.getItem1() != null) {
+                System.out.print(node.getItem1().getKey() + " ");
+                inOrder(node.getNode2());
+                if (node.getItem2() != null) {
+                    System.out.print(node.getItem2().getKey() + " ");
+                    inOrder(node.getNode3());
+                }
+            }
+        }
+    }
+
+    public Item<T, R> getMinKey() {
+        if (root == null) {
+            return null;
+        }
+        Node234<T, R> current = root;
+        Node234<T, R> next = root;
+        while (next != null) {
+            current = next;
+            next = current.getNode0();
+        }
+        return current.getItem0() == null ? current.getParent().getItem0() : current.getItem0();
+
+    }
+
     public Node234<T, R> getRoot() {
         return root;
     }
@@ -157,6 +197,10 @@ class Tree234AppUser {
         }
         tree.insert(500, 'V');
         System.out.println(tree.find(500).toString());
+        System.out.println();
+        tree.traverse();
+        System.out.println();
+        System.out.println("min key is " + tree.getMinKey().getKey());
         System.out.println(tree.find((int) (Math.random() * 5000)).toString());
     }
 }

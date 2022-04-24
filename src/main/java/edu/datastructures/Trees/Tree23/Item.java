@@ -1,48 +1,25 @@
-package edu.datastructures.Trees.BinTrees;
+package edu.datastructures.Trees.Tree23;
 
-
-public class Node<T extends Comparable<T>, R> implements Comparable<T> {
+public class Item <T extends Comparable<T>, R> implements Comparable<T>{
     private T key;
     private R data;
-    private Node<T, R> left;
-    private Node<T, R> right;
 
-    public Node(T key, R data) {
+    public Item(T key, R data) {
         this.key = key;
         this.data = data;
-    }
-
-    public void displayNode() {
-        System.out.print("{Key: " + key + " Data: " + data + "} ");
-    }
-
-    public R getData() {
-        return data;
     }
 
     public T getKey() {
         return key;
     }
 
-    public Node<T, R> getLeft() {
-        return left;
-    }
-
-    public void setLeft(Node<T, R> left) {
-        this.left = left;
-    }
-
-    public Node<T, R> getRight() {
-        return right;
-    }
-
-    public void setRight(Node<T, R> right) {
-        this.right = right;
+    public R getData() {
+        return data;
     }
 
     @Override
-    public int compareTo(T key) {
-        return compare(this.key, key);
+    public int compareTo(T obj) {
+        return compare(this.key, obj);
     }
 
     private int compare(T thisKey, T anotherKey) {
@@ -58,10 +35,9 @@ public class Node<T extends Comparable<T>, R> implements Comparable<T> {
 
     @Override
     public String toString() {
-        return "Node{" +
+        return "Item{" +
                 "key=" + key +
                 ", data=" + data +
                 '}';
     }
 }
-

@@ -83,13 +83,11 @@ public class BinarySearchTreeApp<T extends Comparable<T>, R> {
                 else
                     current = current.getLeft();
                 if (current == null) {
-                    System.out.println("Element with key " + key + " not found");
                     return null;
                 }
             }
             return current;
         } else {
-            System.out.println("Tree is empty");
             return null;
         }
     }
